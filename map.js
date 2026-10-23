@@ -1,0 +1,50 @@
+(() => {
+  const places = [
+    {id:'departamento',name:'Departamento de Cultura',address:'Rua Getúlio Vargas, 622 — Centro',queries:['Departamento de Cultura Palotina','Rua Getúlio Vargas 622 Palotina']},
+    {id:'biblioteca',name:'Biblioteca Pública Municipal Castro Alves',address:'Rua Ipiranga, 720 — Centro',queries:['Biblioteca Castro Alves Palotina','Rua Ipiranga 720 Palotina']},
+    {id:'teatro',name:'Teatro Municipal Ludovico Riedi',address:'Rua Getúlio Vargas — Centro',queries:['Teatro Ludovico Riedi Palotina','Rua Getúlio Vargas Palotina']},
+    {id:'museu',name:'Museu Municipal Antônio Bernardino Daniel',address:'Rua 24 de Junho, s/n — Lago Municipal',queries:['Museu Palotina','Rua 24 de Junho Palotina']}
+  ];
+  const container=document.querySelector('#culture-map'), status=document.querySelector('#map-status');
+  if(!window.L) { status.textContent='Não foi possível carregar o mapa. Consulte os endereços nos cartões acima.';return; }
+  const map=L.map(container,{scrollWheelZoom:false}).setView([-24.283,-53.84],14);
+  const tiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · Busca: <a href="https://photon.komoot.io/">Photon</a>'}).addTo(map);
+  const markers=[];
+  let tileWarning=false;
+  tiles.on('tileerror',()=>{if(!tileWarning){tileWarning=true;status.textContent='O fundo do mapa está indisponível. Os endereços continuam nos cartões acima.';}});
+  function fit(){if(markers.length)map.fitBounds(L.featureGroup(markers).getBounds().pad(.2),{maxZoom:16});}
+  document.querySelector('#map-reset').addEventListener('click',fit);
+  const buttons=places.map((place,index)=>{
+    const button=document.createElement('button');button.type='button';button.textContent=`${index+1}. ${place.name}`;button.disabled=true;
+    document.querySelector('#map-locations').append(button);return button;
+  });
+  async function locate(place){
+    const cacheKey=`cultura-map-v1-${place.id}`;
+    try {const saved=JSON.parse(localStorage.getItem(cacheKey));if(saved && Date.now()-saved.time<7*86400000 && valid(saved.point))return saved;}catch{}
+    for(const query of place.queries){
+      try {
+        const url=new URL('https://photon.komoot.io/api/');url.search=new URLSearchParams({q:query,limit:'5',lat:'-24.283',lon:'-53.84'}).toString();
+        const response=await fetch(url,{signal:AbortSignal.timeout(12000)});if(!response.ok)continue;
+        const data=await response.json();
+        const result=(Array.isArray(data.features)?data.features:[]).find(item=>valid(item.geometry?.coordinates));
+        if(result){const info={point:result.geometry.coordinates,approximate:result.properties?.type==='street'||result.properties?.osm_value==='residential',time:Date.now()};try{localStorage.setItem(cacheKey,JSON.stringify(info));}catch{}return info;}
+      }catch{}
+    }
+    return null;
+  }
+  function valid(point){return Array.isArray(point)&&point.length===2&&Number.isFinite(point[0])&&Number.isFinite(point[1])&&point[0]>-53.91&&point[0]<-53.77&&point[1]>-24.34&&point[1]<-24.22;}
+  async function load(){
+    const results=await Promise.all(places.map(locate));
+    results.forEach((result,index)=>{
+      if(!result)return;
+      const place=places[index], popup=document.createElement('div'),title=document.createElement('strong'),address=document.createElement('p'),link=document.createElement('a');
+      title.textContent=place.name;address.textContent=place.address+' — Palotina, PR'+(result.approximate?' (ponto aproximado)':'');
+      const url=new URL('https://www.google.com/maps/search/');url.search=new URLSearchParams({api:'1',query:place.name+' '+place.address+' Palotina PR'}).toString();link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Como chegar ↗';popup.append(title,address,link);
+      const marker=L.marker([result.point[1],result.point[0]],{title:place.name,alt:place.name}).addTo(map).bindPopup(popup);markers.push(marker);
+      buttons[index].disabled=false;buttons[index].addEventListener('click',()=>{map.setView(marker.getLatLng(),16);marker.openPopup();});
+    });
+    fit();
+    if(!tileWarning)status.textContent=markers.length===4?'Quatro espaços culturais no mapa. Toque em um marcador para conhecer o local.':`Foi possível localizar ${markers.length} de 4 espaços. Consulte também os endereços nos cartões acima.`;
+  }
+  const observer=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();map.invalidateSize();load();}},{rootMargin:'200px'});observer.observe(container);
+})();
