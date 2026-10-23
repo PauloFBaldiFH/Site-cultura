@@ -1,11 +1,20 @@
 const workshops = [
- ['Artesanato','Artes'],['Crochê','Artes'],['Desenho artístico','Artes'],['Teatro','Artes'],['Arte circense','Artes'],['Corpo coreográfico','Dança'],['Baliza','Dança'],['Dança espanhola','Dança'],['Zumba','Dança'],['Frevo e ritmos','Dança'],['Dança alemã','Dança'],['Hip hop','Dança'],['Invernada artística','Dança'],['Dança italiana','Dança'],['Dança de salão','Dança'],['Aulas de canto','Música'],['Canto italiano','Música'],['Coral municipal','Música'],['Coral infantil','Música'],['Fanfarra','Música'],['Musicalização','Música'],['Viola caipira','Música'],['Bateria','Música'],['Saxofone','Música'],['Violino','Música'],['Clarinete','Música'],['Flauta transversal','Música']
+ ['Artesanato','Artes'],['Crochê','Artes'],['Desenho artístico','Artes'],['Teatro','Artes'],['Arte circense','Artes'],['Corpo coreográfico','Dança'],['Baliza','Dança'],['Dança espanhola','Dança'],['Zumba','Dança'],['Frevo e ritmos','Dança'],['Dança alemã','Dança'],['Hip hop','Dança'],['Invernada artística','Dança'],['Dança italiana','Dança'],['Dança de salão','Dança'],['Aulas de canto','Música'],['Canto italiano','Música'],['Coral municipal','Música'],['Coral infantil','Música'],['Fanfarra','Música'],['Musicalização','Música'],['Viola caipira','Música'],['Bateria','Música'],['Saxofone','Música'],['Violino','Música'],['Clarinete','Música'],['Flauta transversal','Música'],['Banda Sinfônica','Música']
 ];
+const workshopSlug = name => name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 let category = 'Todas';
 const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 function render() {
  const query = normalize(document.querySelector('#search').value.trim());
  const selected = workshops.filter(([name, area]) => (category === 'Todas' || area === category) && normalize(name).includes(query));
+ document.querySelector('#workshop-cards').replaceChildren(...selected.map(([name, area]) => {
+  const card = document.createElement('article'); card.className = 'workshop-card';
+  const picture = document.createElement('img'); picture.src = `assets/oficinas/${workshopSlug(name)}.svg`; picture.alt = `Ilustração temática de ${name}`; picture.loading = 'lazy'; picture.width = 600; picture.height = 360;
+  const content = document.createElement('div'); const category = document.createElement('span'); category.className = 'space-label'; category.textContent = area;
+  const heading = document.createElement('h3'); heading.textContent = name;
+  const link = document.createElement('a'); link.className = 'button primary'; link.href = `oficinas/${workshopSlug(name)}.html`; link.textContent = 'Conhecer a oficina ↗'; link.setAttribute('aria-label', `Conhecer a oficina de ${name}`);
+  content.append(category, heading, link); card.append(picture, content); return card;
+ }));
  document.querySelector('#workshop-list').replaceChildren(...selected.map(([name,area]) => {
   const row = document.createElement('tr');
   const title = document.createElement('th'); title.scope = 'row'; title.textContent = name;
