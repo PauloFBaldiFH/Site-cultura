@@ -14,8 +14,12 @@ O conteúdo é estático. Publique `index.html`, `style.css`, `app.js` e a pasta
 
 ## Conteúdo
 
-As 27 oficinas foram transcritas do quadro fornecido. A busca ignora acentos e pode ser combinada com os filtros. Os links de consulta abrem o WhatsApp com o nome da oficina. Não há formulário de inscrição nem coleta de dados.
+As 27 oficinas foram transcritas do quadro fornecido e a Banda Sinfônica foi adicionada posteriormente, totalizando 28. A busca ignora acentos e pode ser combinada com os filtros. Os links de consulta abrem o WhatsApp com o nome da oficina. Não há formulário de inscrição nem coleta de dados.
 
 Endereço, telefone e atendimento foram extraídos das imagens fornecidas. O comunicado de 02/02 não indica o ano; vagas e período atual precisam ser confirmados com o departamento. As categorias das oficinas são uma organização editorial para navegação, não uma classificação oficial.
 
 A fonte online é opcional: fontes locais substitutas são usadas quando o Google Fonts não estiver disponível. O PNG fornecido é usado como marca e favicon, sem alterações.
+
+## Páginas das oficinas
+
+Cada oficina possui um cartão com imagem SVG temática em `assets/oficinas/` e uma página HTML independente em `oficinas/`. Edite essas páginas para acrescentar conteúdo; elas já usam a identidade do site e têm links de retorno e contato. As ilustrações usam símbolos que podem variar conforme as fontes do dispositivo. Mantenha a tabela e os cartões sincronizados pelo cadastro no início de `app.js`.
