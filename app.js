@@ -9,7 +9,13 @@ function render() {
  const selected = workshops.filter(([name, area]) => (category === 'Todas' || area === category) && normalize(name).includes(query));
  document.querySelector('#workshop-cards').replaceChildren(...selected.map(([name, area]) => {
   const card = document.createElement('article'); card.className = 'workshop-card';
-  const picture = document.createElement('img'); picture.src = `assets/oficinas/${workshopSlug(name)}.svg`; picture.alt = `Ilustração temática de ${name}`; picture.loading = 'lazy'; picture.width = 600; picture.height = 360;
+  const picture = document.createElement('div'); picture.className = 'workshop-illustration'; picture.setAttribute('role','img'); picture.setAttribute('aria-label', `Ilustração temática de ${name}`);
+  const artIndex = workshops.findIndex(([title]) => title === name);
+  // The generated collection has slightly different row heights; crop inside each scene.
+  const artRows = [0,174,348,535,715,890,1065,1285];
+  const artRow = Math.floor(artIndex / 4), top = artRows[artRow] + 5, height = artRows[artRow + 1] - artRows[artRow] - 10;
+  picture.style.backgroundPosition = `${(artIndex % 4) * 100 / 3}% ${top * 100 / (1285 - height)}%`;
+  picture.style.backgroundSize = `400% ${1285 * 100 / height}%`;
   const content = document.createElement('div'); const category = document.createElement('span'); category.className = 'space-label'; category.textContent = area;
   const heading = document.createElement('h3'); heading.textContent = name;
   const link = document.createElement('a'); link.className = 'button primary'; link.href = `oficinas/${workshopSlug(name)}.html`; link.textContent = 'Conhecer a oficina ↗'; link.setAttribute('aria-label', `Conhecer a oficina de ${name}`);
