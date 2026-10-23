@@ -21,12 +21,6 @@ function render() {
   const link = document.createElement('a'); link.className = 'button primary'; link.href = `oficinas/${workshopSlug(name)}.html`; link.textContent = 'Conhecer a oficina ↗'; link.setAttribute('aria-label', `Conhecer a oficina de ${name}`);
   content.append(category, heading, link); card.append(picture, content); return card;
  }));
- document.querySelector('#workshop-list').replaceChildren(...selected.map(([name,area]) => {
-  const row = document.createElement('tr');
-  const title = document.createElement('th'); title.scope = 'row'; title.textContent = name;
-  const field = document.createElement('td'); const tag = document.createElement('span'); tag.className = `tag ${area === 'Música' ? 'music' : area === 'Dança' ? 'dance' : 'arts'}`; tag.textContent = area === 'Artes' ? 'Artes e expressão' : area; field.append(tag);
-  const action = document.createElement('td'); const link = document.createElement('a'); link.href = 'https://wa.me/554439131131?text=' + encodeURIComponent(`Olá! Gostaria de informações sobre a oficina de ${name}.`); link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = 'Consultar ↗'; link.setAttribute('aria-label',`Consultar oficina de ${name} pelo WhatsApp`); action.append(link); row.append(title,field,action); return row;
- }));
  document.querySelector('#count').textContent = `${selected.length} ${selected.length === 1 ? 'oficina encontrada' : 'oficinas encontradas'}`;
  document.querySelector('#empty').hidden = selected.length > 0;
 }
