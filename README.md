@@ -22,9 +22,9 @@ A fonte online é opcional: fontes locais substitutas são usadas quando o Googl
 
 ## Páginas das oficinas
 
-Cada oficina possui um cartão com imagem temática da coleção `assets/oficinas-ilustradas.png` e uma página HTML independente em `oficinas/`. Edite essas páginas para acrescentar conteúdo; elas já usam a identidade do site e têm links de retorno e contato. As ilustrações temáticas foram geradas em uma coleção de 28 cenas, organizada em quatro colunas e sete linhas em `assets/oficinas-ilustradas.png`. O CSS seleciona a cena de cada oficina, sem emojis nem dependência de fontes de símbolos. Mantenha a tabela e os cartões sincronizados pelo cadastro no início de `app.js`.
+Cada oficina possui um cartão com imagem temática da coleção `assets/oficinas-ilustradas.png` e uma página HTML independente em `oficinas/`. Edite essas páginas para acrescentar conteúdo; elas já usam a identidade do site e têm links de retorno e contato. As ilustrações temáticas foram geradas em uma coleção de 28 cenas, organizada em quatro colunas e sete linhas em `assets/oficinas-ilustradas.png`. O CSS seleciona a cena de cada oficina, sem emojis nem dependência de fontes de símbolos. Mantenha os cartões atualizados pelo cadastro no início de `app.js`.
 
-A tabela de oficinas é uma visualização alternativa, recolhida por padrão em “Ver oficinas em lista”. Busca e filtros atualizam os cartões e a tabela; a mensagem de nenhum resultado fica fora do bloco recolhido.
+As oficinas são apresentadas apenas em cartões, com busca e filtros. A lista alternativa, o quadro original e o aviso de inscrições foram removidos.
 
 ## Mapas interativos
 
