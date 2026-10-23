@@ -1,6 +1,6 @@
 (() => {
   const places = [
-    {id:'departamento',name:'Departamento de Cultura',address:'Rua Getúlio Vargas, 622 — Centro',queries:['Departamento de Cultura Palotina','Rua Getúlio Vargas 622 Palotina']},
+    {id:'departamento',name:'Departamento de Cultura',address:'Rua Eurico Gaspar Dutra, 706 — Centro',queries:['Rua Eurico Gaspar Dutra 706 Palotina','Rua Gaspar Dutra 706 Palotina']},
     {id:'biblioteca',name:'Biblioteca Pública Municipal Castro Alves',address:'Rua Ipiranga, 720 — Centro',queries:['Biblioteca Castro Alves Palotina','Rua Ipiranga 720 Palotina']},
     {id:'teatro',name:'Teatro Municipal Ludovico Riedi',address:'Rua Getúlio Vargas — Centro',queries:['Teatro Ludovico Riedi Palotina','Rua Getúlio Vargas Palotina']},
     {id:'museu',name:'Museu Municipal Antônio Bernardino Daniel',address:'Rua 24 de Junho, s/n — Lago Municipal',queries:['Museu Palotina','Rua 24 de Junho Palotina']}
@@ -19,15 +19,22 @@
     document.querySelector('#map-locations').append(button);return button;
   });
   async function locate(place){
-    const cacheKey=`cultura-map-v1-${place.id}`;
+    const cacheKey=`cultura-map-v2-${place.id}-${encodeURIComponent(place.address)}`;
     try {const saved=JSON.parse(localStorage.getItem(cacheKey));if(saved && Date.now()-saved.time<7*86400000 && valid(saved.point))return saved;}catch{}
     for(const query of place.queries){
       try {
         const url=new URL('https://photon.komoot.io/api/');url.search=new URLSearchParams({q:query,limit:'5',lat:'-24.283',lon:'-53.84'}).toString();
         const response=await fetch(url,{signal:AbortSignal.timeout(12000)});if(!response.ok)continue;
         const data=await response.json();
-        const result=(Array.isArray(data.features)?data.features:[]).find(item=>valid(item.geometry?.coordinates));
-        if(result){const info={point:result.geometry.coordinates,approximate:result.properties?.type==='street'||result.properties?.osm_value==='residential',time:Date.now()};try{localStorage.setItem(cacheKey,JSON.stringify(info));}catch{}return info;}
+        const candidates=(Array.isArray(data.features)?data.features:[]).filter(item=>valid(item.geometry?.coordinates));
+        const matchesAddress = item => {
+          if(place.id !== 'departamento') return true;
+          const street = String(item.properties?.street || item.properties?.name || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+          const house = item.properties?.housenumber;
+          return street.includes('gaspar') && street.includes('dutra') && (!house || String(house) === '706');
+        };
+        const result=candidates.filter(matchesAddress).sort((a,b)=>Number(Boolean(b.properties?.housenumber))-Number(Boolean(a.properties?.housenumber)))[0];
+        if(result){const info={point:result.geometry.coordinates,approximate:!result.properties?.housenumber && (place.id==='departamento'||result.properties?.type==='street'||result.properties?.osm_value==='residential'),time:Date.now()};try{localStorage.setItem(cacheKey,JSON.stringify(info));}catch{}return info;}
       }catch{}
     }
     return null;
@@ -39,7 +46,7 @@
       if(!result)return;
       const place=places[index], popup=document.createElement('div'),title=document.createElement('strong'),address=document.createElement('p'),link=document.createElement('a');
       title.textContent=place.name;address.textContent=place.address+' — Palotina, PR'+(result.approximate?' (ponto aproximado)':'');
-      const url=new URL('https://www.google.com/maps/search/');url.search=new URLSearchParams({api:'1',query:place.name+' '+place.address+' Palotina PR'}).toString();link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Como chegar ↗';popup.append(title,address,link);
+      const url=new URL('https://www.google.com/maps/search/');url.search=new URLSearchParams({api:'1',query:(place.id==='departamento'?'':place.name+' ')+place.address+' Palotina PR'}).toString();link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Como chegar ↗';popup.append(title,address,link);
       const marker=L.marker([result.point[1],result.point[0]],{title:place.name,alt:place.name}).addTo(map).bindPopup(popup);markers.push(marker);
       buttons[index].disabled=false;buttons[index].addEventListener('click',()=>{map.setView(marker.getLatLng(),16);marker.openPopup();});
     });
