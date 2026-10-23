@@ -25,3 +25,19 @@ A fonte online é opcional: fontes locais substitutas são usadas quando o Googl
 Cada oficina possui um cartão com imagem temática da coleção `assets/oficinas-ilustradas.png` e uma página HTML independente em `oficinas/`. Edite essas páginas para acrescentar conteúdo; elas já usam a identidade do site e têm links de retorno e contato. As ilustrações temáticas foram geradas em uma coleção de 28 cenas, organizada em quatro colunas e sete linhas em `assets/oficinas-ilustradas.png`. O CSS seleciona a cena de cada oficina, sem emojis nem dependência de fontes de símbolos. Mantenha a tabela e os cartões sincronizados pelo cadastro no início de `app.js`.
 
 A tabela de oficinas é uma visualização alternativa, recolhida por padrão em “Ver oficinas em lista”. Busca e filtros atualizam os cartões e a tabela; a mensagem de nenhum resultado fica fora do bloco recolhido.
+
+## Mapas interativos
+
+Os quatro cartões de instituições incorporam mapas do Google com busca pelo nome e endereço, carregamento sob demanda, título acessível e botão externo “Como chegar”. Não é necessária chave de API para essa incorporação. A localização depende do resultado do Google para o endereço; confira os marcadores antes da divulgação. Os mapas precisam de conexão com o Google.
+
+## Agenda de eventos (Google Calendar)
+
+A integração está preparada, mas não está conectada a uma agenda real. Sem configuração, o site mostra a programação em preparação e um contato; não inventa eventos.
+
+1. Crie ou escolha uma agenda exclusiva para eventos públicos da Cultura no Google Calendar.
+2. Em **Configurações da agenda → Permissões de acesso a eventos**, disponibilize a agenda ao público com os detalhes que devem aparecer no site. Não use uma agenda pessoal com compromissos privados.
+3. Em **Integrar agenda**, copie o **ID da agenda** (não um segredo ou chave de API).
+4. Edite `calendar-config.js`, preencha `googleCalendarId` e publique o arquivo. O fuso padrão é `America/Sao_Paulo`.
+5. Abra o site em uma janela anônima e confira se os eventos são visíveis sem login. As mudanças de programação são feitas no Google Calendar; não exigem editar o site.
+
+O calendário é incorporado em modo agenda, com controles para outras visualizações e link para abrir no Google. Esta integração não exige backend nem chave de API. O OpenCalendar ou outro serviço pode ser integrado posteriormente conforme a plataforma escolhida e seu link público de incorporação.
