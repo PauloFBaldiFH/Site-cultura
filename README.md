@@ -18,7 +18,7 @@ As 27 oficinas foram transcritas do quadro fornecido e a Banda Sinfônica foi ad
 
 Endereço, telefone e atendimento foram extraídos das imagens fornecidas. Vagas e períodos de inscrição precisam ser confirmados com o departamento. As categorias das oficinas são uma organização editorial para navegação, não uma classificação oficial.
 
-A fonte online é opcional: fontes locais substitutas são usadas quando o Google Fonts não estiver disponível. O PNG fornecido é usado como marca e favicon, sem alterações.
+A fonte online é opcional: fontes locais substitutas são usadas quando o Google Fonts não estiver disponível. O arquivo `assets/nova logo da cultura.png` é usado como marca e favicon na página principal e nas páginas das oficinas, sem alterações na imagem original.
 
 ## Páginas das oficinas
 
