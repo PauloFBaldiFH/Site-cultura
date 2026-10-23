@@ -1,6 +1,9 @@
-// ID público da agenda Google: Configurações da agenda > Integrar agenda > ID da agenda.
-// Use uma agenda de eventos públicos da Cultura, nunca uma agenda pessoal privada.
+// Calendário local pronto para receber eventos. Datas no formato AAAA-MM-DD.
+// Exemplo: { date: '2026-12-10', title: 'Apresentação', time: '19h', location: 'Teatro Municipal' }
+// Use apenas eventos públicos confirmados. Não inclua dados privados.
 window.CULTURA_CALENDAR = {
-  googleCalendarId: '',
-  timeZone: 'America/Sao_Paulo'
+  timeZone: 'America/Sao_Paulo',
+  events: [],
+  // Opcional: ao conectar uma agenda pública do Google, ela substitui a visualização local.
+  googleCalendarId: ''
 };

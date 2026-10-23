@@ -10,13 +10,13 @@ Na pasta `/workspace/Site-cultura`, execute:
 python3 -m http.server 3000 --bind 0.0.0.0
 ```
 
-O conteúdo é estático. Publique `index.html`, `style.css`, `app.js` e a pasta `assets` em uma hospedagem estática com HTTPS.
+O conteúdo é estático. Publique `index.html`, `style.css`, `app.js`, `calendar.js`, `calendar-config.js`, `map.js` e as pastas `assets`, `vendor` e `oficinas` em uma hospedagem estática com HTTPS.
 
 ## Conteúdo
 
-As 27 oficinas foram transcritas do quadro fornecido e a Banda Sinfônica foi adicionada posteriormente, totalizando 28. A busca ignora acentos e pode ser combinada com os filtros. Os links de consulta abrem o WhatsApp com o nome da oficina. Não há formulário de inscrição nem coleta de dados.
+As 27 oficinas foram transcritas do quadro fornecido e a Banda Sinfônica foi adicionada posteriormente, totalizando 28. A busca ignora acentos e pode ser combinada com os filtros. Os cartões levam às páginas individuais das oficinas. Não há formulário de inscrição nem coleta de dados.
 
-Endereço, telefone e atendimento foram extraídos das imagens fornecidas. O comunicado de 02/02 não indica o ano; vagas e período atual precisam ser confirmados com o departamento. As categorias das oficinas são uma organização editorial para navegação, não uma classificação oficial.
+Endereço, telefone e atendimento foram extraídos das imagens fornecidas. Vagas e períodos de inscrição precisam ser confirmados com o departamento. As categorias das oficinas são uma organização editorial para navegação, não uma classificação oficial.
 
 A fonte online é opcional: fontes locais substitutas são usadas quando o Google Fonts não estiver disponível. O PNG fornecido é usado como marca e favicon, sem alterações.
 
@@ -26,18 +26,22 @@ Cada oficina possui um cartão com imagem temática da coleção `assets/oficina
 
 As oficinas são apresentadas apenas em cartões, com busca e filtros. A lista alternativa, o quadro original e o aviso de inscrições foram removidos.
 
-## Mapas interativos
+## Mapa dos espaços culturais
 
-Os quatro cartões de instituições incorporam mapas do Google com busca pelo nome e endereço, carregamento sob demanda, título acessível e botão externo “Como chegar”. Não é necessária chave de API para essa incorporação. A localização depende do resultado do Google para o endereço; confira os marcadores antes da divulgação. Os mapas precisam de conexão com o Google.
+Há um único mapa Leaflet/OpenStreetMap abaixo dos quatro cartões, com marcadores, popups, seleção por instituição e botão para enquadrar todos os pontos. A biblioteca Leaflet 1.9.4 e sua licença estão em `vendor/leaflet`, obtidas do pacote oficial npm.
 
-## Agenda de eventos (Google Calendar)
+As coordenadas são buscadas pelo nome e endereço no Photon ao aproximar o mapa da tela e guardadas no navegador por sete dias. Resultados fora de Palotina são rejeitados. Resultados que identificam apenas uma rua são indicados como aproximados. Confira os pontos no site publicado; a rede do ambiente bloqueou o Photon e a validação de marcadores foi feita com respostas simuladas. Falhas de busca e de mapa são informadas sem inventar pontos. Os serviços externos exigem acesso à internet: `photon.komoot.io` e `tile.openstreetmap.org`.
 
-A integração está preparada, mas não está conectada a uma agenda real. Sem configuração, o site mostra a programação em preparação e um contato; não inventa eventos.
+## Calendário de eventos
 
-1. Crie ou escolha uma agenda exclusiva para eventos públicos da Cultura no Google Calendar.
-2. Em **Configurações da agenda → Permissões de acesso a eventos**, disponibilize a agenda ao público com os detalhes que devem aparecer no site. Não use uma agenda pessoal com compromissos privados.
-3. Em **Integrar agenda**, copie o **ID da agenda** (não um segredo ou chave de API).
-4. Edite `calendar-config.js`, preencha `googleCalendarId` e publique o arquivo. O fuso padrão é `America/Sao_Paulo`.
-5. Abra o site em uma janela anônima e confira se os eventos são visíveis sem login. As mudanças de programação são feitas no Google Calendar; não exigem editar o site.
+O ícone de calendário no cabeçalho abre uma janela com calendário mensal pronto para uso, sem exigir conta Google ou redirecionar ao WhatsApp. É possível navegar entre meses, voltar para hoje e selecionar um dia. Dias sem eventos mostram “Nenhum evento cadastrado para este dia”. Escape ou o botão de fechar retorna ao site.
 
-O calendário é incorporado em modo agenda, com controles para outras visualizações e link para abrir no Google. Esta integração não exige backend nem chave de API. O OpenCalendar ou outro serviço pode ser integrado posteriormente conforme a plataforma escolhida e seu link público de incorporação.
+Para cadastrar eventos, edite a lista `events` de `calendar-config.js` e publique o arquivo:
+
+```js
+{ date: '2026-12-10', title: 'Nome do evento', time: '19h', location: 'Teatro Municipal' }
+```
+
+Use apenas eventos públicos confirmados. O exemplo é ilustrativo e não está cadastrado na programação. O fuso para identificar o dia atual é `America/Sao_Paulo`.
+
+Opcionalmente, uma agenda Google pode substituir a visualização local: torne uma agenda exclusiva de eventos públicos visível ao público, copie seu ID em **Configurações → Integrar agenda** e preencha `googleCalendarId`. O iframe só carrega ao abrir o calendário. Verifique em janela anônima se os eventos aparecem sem login. Não use uma agenda pessoal privada. Nenhuma chave de API ou backend é necessário.
