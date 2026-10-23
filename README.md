@@ -45,3 +45,9 @@ Para cadastrar eventos, edite a lista `events` de `calendar-config.js` e publiqu
 Use apenas eventos públicos confirmados. O exemplo é ilustrativo e não está cadastrado na programação. O fuso para identificar o dia atual é `America/Sao_Paulo`.
 
 Opcionalmente, uma agenda Google pode substituir a visualização local: torne uma agenda exclusiva de eventos públicos visível ao público, copie seu ID em **Configurações → Integrar agenda** e preencha `googleCalendarId`. O iframe só carrega ao abrir o calendário. Verifique em janela anônima se os eventos aparecem sem login. Não use uma agenda pessoal privada. Nenhuma chave de API ou backend é necessário.
+
+## Escola Municipal de Artes Gasparzinho
+
+Quinta instituição na seção de espaços culturais, com a imagem `assets/desenho escola gasparzinho.jpg`. Endereço, horário e contatos próprios não foram fornecidos; o cartão orienta consultar o Departamento de Cultura. O mapa busca a instituição pelo nome e só aceita resultados identificados como Gasparzinho, sem inventar endereço ou coordenadas.
+
+As instituições são exibidas em uma única coluna, com cartões horizontais (imagem à esquerda e informações à direita) no desktop. No celular, a imagem fica acima do texto.

@@ -3,7 +3,8 @@
     {id:'departamento',name:'Departamento de Cultura',address:'Rua Eurico Gaspar Dutra, 706 — Centro',queries:['Rua Eurico Gaspar Dutra 706 Palotina','Rua Gaspar Dutra 706 Palotina']},
     {id:'biblioteca',name:'Biblioteca Pública Municipal Castro Alves',address:'Rua Ipiranga, 720 — Centro',queries:['Biblioteca Castro Alves Palotina','Rua Ipiranga 720 Palotina']},
     {id:'teatro',name:'Teatro Municipal Ludovico Riedi',address:'Rua Getúlio Vargas — Centro',queries:['Teatro Ludovico Riedi Palotina','Rua Getúlio Vargas Palotina']},
-    {id:'museu',name:'Museu Municipal Antônio Bernardino Daniel',address:'Rua 24 de Junho, s/n — Lago Municipal',queries:['Museu Palotina','Rua 24 de Junho Palotina']}
+    {id:'museu',name:'Museu Municipal Antônio Bernardino Daniel',address:'Rua 24 de Junho, s/n — Lago Municipal',queries:['Museu Palotina','Rua 24 de Junho Palotina']},
+    {id:'gasparzinho',name:'Escola Municipal de Artes Gasparzinho',address:'Palotina — PR',queries:['Escola Municipal de Artes Gasparzinho Palotina','Escola Gasparzinho Palotina']}
   ];
   const container=document.querySelector('#culture-map'), status=document.querySelector('#map-status');
   if(!window.L) { status.textContent='Não foi possível carregar o mapa. Consulte os endereços nos cartões acima.';return; }
@@ -28,6 +29,7 @@
         const data=await response.json();
         const candidates=(Array.isArray(data.features)?data.features:[]).filter(item=>valid(item.geometry?.coordinates));
         const matchesAddress = item => {
+          if(place.id === 'gasparzinho') return String(item.properties?.name || '').toLowerCase().includes('gasparzinho');
           if(place.id !== 'departamento') return true;
           const street = String(item.properties?.street || item.properties?.name || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
           const house = item.properties?.housenumber;
@@ -51,7 +53,7 @@
       buttons[index].disabled=false;buttons[index].addEventListener('click',()=>{map.setView(marker.getLatLng(),16);marker.openPopup();});
     });
     fit();
-    if(!tileWarning)status.textContent=markers.length===4?'Quatro espaços culturais no mapa. Toque em um marcador para conhecer o local.':`Foi possível localizar ${markers.length} de 4 espaços. Consulte também os endereços nos cartões acima.`;
+    if(!tileWarning)status.textContent=markers.length===places.length?`${places.length} espaços culturais no mapa. Toque em um marcador para conhecer o local.`:`Foi possível localizar ${markers.length} de ${places.length} espaços. Consulte também as informações nos cartões acima.`;
   }
   const observer=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();map.invalidateSize();load();}},{rootMargin:'200px'});observer.observe(container);
 })();
