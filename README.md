@@ -51,3 +51,5 @@ Opcionalmente, uma agenda Google pode substituir a visualização local: torne u
 Quinta instituição na seção de espaços culturais, com a imagem `assets/desenho escola gasparzinho.jpg`. Endereço, horário e contatos próprios não foram fornecidos; o cartão orienta consultar o Departamento de Cultura. O mapa busca a instituição pelo nome e só aceita resultados identificados como Gasparzinho, sem inventar endereço ou coordenadas.
 
 As instituições são exibidas em uma única coluna, com cartões horizontais (imagem à esquerda e informações à direita) no desktop. No celular, a imagem fica acima do texto.
+
+O Departamento de Cultura usa o ponto fixo confirmado pelo usuário: latitude **-24.289374**, longitude **-53.840933**. Esse ponto tem prioridade sobre qualquer cache ou busca por endereço. Os links “Como chegar” do cartão e do popup também usam essas coordenadas. Os demais locais continuam com a busca existente.
