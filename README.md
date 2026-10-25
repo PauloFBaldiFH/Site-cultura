@@ -53,3 +53,11 @@ Quinta instituição na seção de espaços culturais, com a imagem `assets/dese
 As instituições são exibidas em uma única coluna, com cartões horizontais (imagem à esquerda e informações à direita) no desktop. No celular, a imagem fica acima do texto.
 
 O Departamento de Cultura usa o ponto fixo confirmado pelo usuário: latitude **-24.289374**, longitude **-53.840933**. Esse ponto tem prioridade sobre qualquer cache ou busca por endereço. Os links “Como chegar” do cartão e do popup também usam essas coordenadas. Os demais locais continuam com a busca existente.
+
+## Descoberta e compartilhamento
+
+O site usa `https://cultura.palotina.org` como endereço canônico. `sitemap.xml` lista as 29 páginas; `robots.txt` permite rastreamento e aponta ao sitemap. Após publicar, envie `https://cultura.palotina.org/sitemap.xml` ao Google Search Console. Esses arquivos não garantem indexação ou posição nas buscas.
+
+As páginas têm títulos, descrições, metadados Open Graph/Twitter e dados estruturados JSON-LD: organização e lista de oficinas na página inicial, página e navegação hierárquica nas oficinas. Os cartões também estão no HTML inicial para serem encontrados sem execução de JavaScript. Busca e filtros continuam funcionando com JavaScript. Cada oficina aponta para outras três da mesma área; os textos usam apenas as informações existentes, sem inventar horários ou vagas.
+
+Atualize o sitemap, as referências e os dados estruturados ao acrescentar ou retirar oficinas. Os links do catálogo usam `https://biblioteca.palotina.org/`; o Instagram da escola é `@escoladeartesgasparzinho`.
