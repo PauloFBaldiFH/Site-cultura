@@ -16,7 +16,7 @@
   function fit(){if(markers.length)map.fitBounds(L.featureGroup(markers).getBounds().pad(.2),{maxZoom:16});}
   document.querySelector('#map-reset').addEventListener('click',fit);
   const buttons=places.map((place,index)=>{
-    const button=document.createElement('button');button.type='button';button.textContent=`${index+1}. ${place.name}`;button.disabled=true;
+    const button=document.createElement('button');button.type='button';const number=document.createElement('span');number.className='map-location-number';number.textContent=index+1;button.append(number,document.createTextNode(place.name));button.disabled=true;
     document.querySelector('#map-locations').append(button);return button;
   });
   async function locate(place){
@@ -51,7 +51,8 @@
       const popup=document.createElement('div'),title=document.createElement('strong'),address=document.createElement('p'),link=document.createElement('a');
       title.textContent=place.name;address.textContent=place.address+' — Palotina, PR'+(result.approximate?' (ponto aproximado)':'');
       const url=new URL('https://www.google.com/maps/search/');url.search=new URLSearchParams({api:'1',query:valid(place.point)?`${place.point[1]},${place.point[0]}`:place.name+' '+place.address+' Palotina PR'}).toString();link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Como chegar ↗';popup.append(title,address,link);
-      const marker=L.marker([result.point[1],result.point[0]],{title:place.name,alt:place.name}).addTo(map).bindPopup(popup);markers.push(marker);
+      const icon=L.divIcon({className:'culture-map-marker',html:`<span><b>${index+1}</b></span>`,iconSize:[36,44],iconAnchor:[18,42],popupAnchor:[0,-40]});
+      const marker=L.marker([result.point[1],result.point[0]],{icon,title:place.name,alt:place.name}).addTo(map).bindPopup(popup);markers.push(marker);
       buttons[index].disabled=false;buttons[index].addEventListener('click',()=>{map.setView(marker.getLatLng(),16);marker.openPopup();});
       fit();
     }));
