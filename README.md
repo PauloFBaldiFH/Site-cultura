@@ -53,3 +53,9 @@ Quinta instituição na seção de espaços culturais, com a imagem `assets/dese
 As instituições são exibidas em uma única coluna, com cartões horizontais (imagem à esquerda e informações à direita) no desktop. No celular, a imagem fica acima do texto.
 
 O Departamento de Cultura usa o ponto fixo confirmado pelo usuário: latitude **-24.289374**, longitude **-53.840933**. Esse ponto tem prioridade sobre qualquer cache ou busca por endereço. Os links “Como chegar” do cartão e do popup também usam essas coordenadas. Os demais locais continuam com a busca existente.
+
+## Indexação no Google
+
+`sitemap.xml` lista a página principal e as 28 páginas de oficinas usando o domínio de `CNAME`, `https://cultura.palotina.org`. `robots.txt` permite o rastreamento e informa o endereço do sitemap. Cada página tem uma URL canônica no domínio oficial. Ao criar ou remover páginas, atualize o sitemap. As seções da página inicial não são páginas separadas e não precisam de entradas próprias. Não são informadas datas de modificação sem evidência.
+
+Depois de publicar, abra `https://cultura.palotina.org/sitemap.xml` e envie esse endereço em **Google Search Console → Sitemaps**. A propriedade de domínio `palotina.org` cobre o subdomínio. O sitemap ajuda o Google a descobrir páginas; a indexação depende da avaliação do Google.
