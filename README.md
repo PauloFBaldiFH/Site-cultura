@@ -10,7 +10,7 @@ Na pasta `/workspace/Site-cultura`, execute:
 python3 -m http.server 3000 --bind 0.0.0.0
 ```
 
-O conteúdo é estático. Publique `index.html`, `style.css`, `app.js`, `calendar.js`, `calendar-config.js`, `map.js` e as pastas `assets`, `vendor` e `oficinas` em uma hospedagem estática com HTTPS.
+O conteúdo é estático. Publique `index.html`, `style.css`, `visual.css`, `app.js`, `calendar.js`, `calendar-config.js`, `map.js` e as pastas `assets`, `vendor` e `oficinas` em uma hospedagem estática com HTTPS.
 
 ## Conteúdo
 
@@ -61,3 +61,7 @@ O site usa `https://cultura.palotina.org` como endereço canônico. `sitemap.xml
 As páginas têm títulos, descrições, metadados Open Graph/Twitter e dados estruturados JSON-LD: organização e lista de oficinas na página inicial, página e navegação hierárquica nas oficinas. Os cartões também estão no HTML inicial para serem encontrados sem execução de JavaScript. Busca e filtros continuam funcionando com JavaScript. Cada oficina aponta para outras três da mesma área; os textos usam apenas as informações existentes, sem inventar horários ou vagas.
 
 Atualize o sitemap, as referências e os dados estruturados ao acrescentar ou retirar oficinas. Os links do catálogo usam `https://biblioteca.palotina.org/`; o Instagram da escola é `@escoladeartesgasparzinho`.
+
+## Identidade visual
+
+`visual.css` reúne os ajustes compartilhados pela página principal e pelas oficinas: paleta creme/verde com destaques pontuais, tipografia, atalhos iniciais, cartões compactos e adaptação a telas pequenas. Os cartões das instituições continuam horizontais no desktop e empilhados no celular, mostrando as ilustrações inteiras. O mapa usa marcadores numerados em correspondência com a lista. A folha é carregada após `style.css`; publique ambos os arquivos.
