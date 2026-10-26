@@ -6,7 +6,8 @@
   const today = `${part('year')}-${part('month')}-${part('day')}`;
   let selected = today;
   let shown = new Date(Number(part('year')),Number(part('month')) - 1,1);
-  const events = Array.isArray(config.events) ? config.events.filter(event => event && /^\d{4}-\d{2}-\d{2}$/.test(event.date) && typeof event.title === 'string') : [];
+  const candidates = [...(Array.isArray(config.events) ? config.events : []), ...(Array.isArray(window.CULTURA_IMPORTED_EVENTS) ? window.CULTURA_IMPORTED_EVENTS : [])];
+  const events = candidates.filter(event => event && /^\d{4}-\d{2}-\d{2}$/.test(event.date) && typeof event.title === 'string');
   const dialog = document.querySelector('#calendar-dialog');
   const calendarId = typeof config.googleCalendarId === 'string' ? config.googleCalendarId.trim() : '';
   function dateKey(day) { return `${shown.getFullYear()}-${String(shown.getMonth()+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`; }

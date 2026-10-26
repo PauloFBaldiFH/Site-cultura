@@ -1,0 +1,339 @@
+{
+  "account": "cultura_palotina",
+  "maxPosts": 6,
+  "delayMs": 3000,
+  "downloadImages": true,
+  "groups": [
+    {
+      "id": "oficina:artesanato",
+      "name": "Artesanato",
+      "keywords": [
+        "Artesanato"
+      ],
+      "url": "oficinas/artesanato.html"
+    },
+    {
+      "id": "oficina:croche",
+      "name": "Crochê",
+      "keywords": [
+        "Crochê"
+      ],
+      "url": "oficinas/croche.html"
+    },
+    {
+      "id": "oficina:desenho-artistico",
+      "name": "Desenho artístico",
+      "keywords": [
+        "Desenho artístico",
+        "Desenhoartístico"
+      ],
+      "url": "oficinas/desenho-artistico.html"
+    },
+    {
+      "id": "oficina:teatro",
+      "name": "Teatro",
+      "keywords": [
+        "oficina de teatro",
+        "aulas de teatro",
+        "oficinadeteatro",
+        "aulasdeteatro"
+      ],
+      "url": "oficinas/teatro.html"
+    },
+    {
+      "id": "oficina:arte-circense",
+      "name": "Arte circense",
+      "keywords": [
+        "arte circense",
+        "oficina de circo",
+        "artecircense",
+        "oficinadecirco"
+      ],
+      "url": "oficinas/arte-circense.html"
+    },
+    {
+      "id": "oficina:corpo-coreografico",
+      "name": "Corpo coreográfico",
+      "keywords": [
+        "corpo coreografico",
+        "corpocoreografico"
+      ],
+      "url": "oficinas/corpo-coreografico.html"
+    },
+    {
+      "id": "oficina:baliza",
+      "name": "Baliza",
+      "keywords": [
+        "baliza",
+        "balizas"
+      ],
+      "url": "oficinas/baliza.html"
+    },
+    {
+      "id": "oficina:danca-espanhola",
+      "name": "Dança espanhola",
+      "keywords": [
+        "Dança espanhola",
+        "Dançaespanhola"
+      ],
+      "url": "oficinas/danca-espanhola.html"
+    },
+    {
+      "id": "oficina:zumba",
+      "name": "Zumba",
+      "keywords": [
+        "Zumba"
+      ],
+      "url": "oficinas/zumba.html"
+    },
+    {
+      "id": "oficina:frevo-e-ritmos",
+      "name": "Frevo e ritmos",
+      "keywords": [
+        "Frevo e ritmos",
+        "Frevoeritmos"
+      ],
+      "url": "oficinas/frevo-e-ritmos.html"
+    },
+    {
+      "id": "oficina:danca-alema",
+      "name": "Dança alemã",
+      "keywords": [
+        "Dança alemã",
+        "Dançaalemã"
+      ],
+      "url": "oficinas/danca-alema.html"
+    },
+    {
+      "id": "oficina:hip-hop",
+      "name": "Hip hop",
+      "keywords": [
+        "Hip hop",
+        "Hiphop"
+      ],
+      "url": "oficinas/hip-hop.html"
+    },
+    {
+      "id": "oficina:invernada-artistica",
+      "name": "Invernada artística",
+      "keywords": [
+        "Invernada artística",
+        "Invernadaartística"
+      ],
+      "url": "oficinas/invernada-artistica.html"
+    },
+    {
+      "id": "oficina:danca-italiana",
+      "name": "Dança italiana",
+      "keywords": [
+        "Dança italiana",
+        "Dançaitaliana"
+      ],
+      "url": "oficinas/danca-italiana.html"
+    },
+    {
+      "id": "oficina:danca-de-salao",
+      "name": "Dança de salão",
+      "keywords": [
+        "Dança de salão",
+        "Dançadesalão"
+      ],
+      "url": "oficinas/danca-de-salao.html"
+    },
+    {
+      "id": "oficina:aulas-de-canto",
+      "name": "Aulas de canto",
+      "keywords": [
+        "aulas de canto",
+        "oficina de canto",
+        "aulasdecanto",
+        "oficinadecanto"
+      ],
+      "url": "oficinas/aulas-de-canto.html"
+    },
+    {
+      "id": "oficina:canto-italiano",
+      "name": "Canto italiano",
+      "keywords": [
+        "canto italiano",
+        "cantoitaliano"
+      ],
+      "url": "oficinas/canto-italiano.html"
+    },
+    {
+      "id": "oficina:coral-municipal",
+      "name": "Coral municipal",
+      "keywords": [
+        "Coral municipal",
+        "Coralmunicipal"
+      ],
+      "url": "oficinas/coral-municipal.html"
+    },
+    {
+      "id": "oficina:coral-infantil",
+      "name": "Coral infantil",
+      "keywords": [
+        "coral infantil",
+        "coralinfantil"
+      ],
+      "url": "oficinas/coral-infantil.html"
+    },
+    {
+      "id": "oficina:fanfarra",
+      "name": "Fanfarra",
+      "keywords": [
+        "Fanfarra"
+      ],
+      "url": "oficinas/fanfarra.html"
+    },
+    {
+      "id": "oficina:musicalizacao",
+      "name": "Musicalização",
+      "keywords": [
+        "Musicalização"
+      ],
+      "url": "oficinas/musicalizacao.html"
+    },
+    {
+      "id": "oficina:viola-caipira",
+      "name": "Viola caipira",
+      "keywords": [
+        "viola caipira",
+        "violacaipira"
+      ],
+      "url": "oficinas/viola-caipira.html"
+    },
+    {
+      "id": "oficina:bateria",
+      "name": "Bateria",
+      "keywords": [
+        "oficina de bateria",
+        "aulas de bateria",
+        "baterista",
+        "oficinadebateria",
+        "aulasdebateria"
+      ],
+      "url": "oficinas/bateria.html"
+    },
+    {
+      "id": "oficina:saxofone",
+      "name": "Saxofone",
+      "keywords": [
+        "Saxofone"
+      ],
+      "url": "oficinas/saxofone.html"
+    },
+    {
+      "id": "oficina:violino",
+      "name": "Violino",
+      "keywords": [
+        "Violino"
+      ],
+      "url": "oficinas/violino.html"
+    },
+    {
+      "id": "oficina:clarinete",
+      "name": "Clarinete",
+      "keywords": [
+        "Clarinete"
+      ],
+      "url": "oficinas/clarinete.html"
+    },
+    {
+      "id": "oficina:flauta-transversal",
+      "name": "Flauta transversal",
+      "keywords": [
+        "Flauta transversal",
+        "Flautatransversal"
+      ],
+      "url": "oficinas/flauta-transversal.html"
+    },
+    {
+      "id": "oficina:banda-sinfonica",
+      "name": "Banda Sinfônica",
+      "keywords": [
+        "Banda Sinfônica",
+        "BandaSinfônica"
+      ],
+      "url": "oficinas/banda-sinfonica.html"
+    },
+    {
+      "id": "espaco:departamento",
+      "name": "Departamento de Cultura",
+      "keywords": [
+        "departamento de cultura",
+        "departamentodecultura"
+      ],
+      "url": "index.html#departamento"
+    },
+    {
+      "id": "espaco:biblioteca",
+      "name": "Biblioteca Castro Alves",
+      "keywords": [
+        "biblioteca",
+        "castro alves",
+        "bibliotecamunicipalpalotina",
+        "castroalves"
+      ],
+      "url": "index.html#biblioteca"
+    },
+    {
+      "id": "espaco:teatro",
+      "name": "Teatro Ludovico Riedi",
+      "keywords": [
+        "teatro municipal",
+        "ludovico riedi",
+        "teatromunicipal",
+        "ludovicoriedi"
+      ],
+      "url": "index.html#teatro"
+    },
+    {
+      "id": "espaco:museu",
+      "name": "Museu Municipal",
+      "keywords": [
+        "museu",
+        "antonio bernardino daniel",
+        "antoniobernardinodaniel"
+      ],
+      "url": "index.html#museu"
+    },
+    {
+      "id": "espaco:gasparzinho",
+      "name": "Escola de Artes Gasparzinho",
+      "keywords": [
+        "gasparzinho",
+        "escoladeartesgasparzinho"
+      ],
+      "url": "index.html#gasparzinho"
+    }
+  ],
+  "events": [
+    {
+      "id": "femuse",
+      "name": "FEMUSE",
+      "description": "Publicações e informações sobre o FEMUSE compartilhadas pela Cultura de Palotina.",
+      "keywords": [
+        "femuse"
+      ]
+    },
+    {
+      "id": "canta-palotina",
+      "name": "Canta Palotina",
+      "description": "Publicações e informações sobre o Canta Palotina.",
+      "keywords": [
+        "canta palotina",
+        "cantapalotina"
+      ]
+    },
+    {
+      "id": "domingueira",
+      "name": "Domingueira",
+      "description": "Publicações e informações sobre a Domingueira em Palotina.",
+      "keywords": [
+        "domingueira",
+        "domingueiras"
+      ]
+    }
+  ]
+}
