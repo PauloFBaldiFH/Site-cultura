@@ -74,17 +74,17 @@ Publicações editadas no Instagram voltam como rascunho se a legenda mudou. Apr
 
 **Não foi implantado nem testado no seu servidor.** Os limites abaixo reduzem risco, mas nenhum processo extra tem impacto zero. Como o Koha é produção, só habilite a agenda depois de testar uma execução manual pelo systemd e conferir recursos. Não instale navegador automatizado, banco, Docker nem pacotes Node globais para esse coletor.
 
-1. Mescle o PR no GitHub. No terminal Ubuntu, confira os recursos e se existe Node 22+ em `/usr/bin/node`:
+1. Mescle o PR no GitHub. No terminal Ubuntu, confira os recursos e a arquitetura do sistema:
 
    ```sh
    free -h
    df -h /var/lib
-   /usr/bin/node --version
+   uname -m
    command -v git
    systemctl --version
    ```
 
-   Se Node não existir ou for antigo, pare aqui: não substitua um runtime compartilhado em produção. Podemos avaliar uma instalação isolada numa etapa separada.
+   O coletor usará uma cópia privada do Node 24 LTS em `/opt/cultura-node`, sem substituir `/usr/bin/node` nem usar apt. O instalador suporta x86_64 e ARM64.
 
 2. Em um diretório de trabalho fora das pastas do Koha, clone o repositório. Não use um checkout com alterações locais:
 
@@ -97,10 +97,13 @@ Publicações editadas no Instagram voltam como rascunho se a legenda mudou. Apr
    Esse último comando só mostra o plano. Após conferir o script, execute:
 
    ```sh
+   sudo bash automation/install-node.sh --apply
    sudo bash automation/install-vps.sh --apply
    ```
 
-   Ele cria o usuário sem login `cultura-importer`, clona para `/var/lib/cultura-importer/site` e registra unidades separadas. Não reinicia Koha, MySQL, Nginx ou túnel; não altera DNS/firewall; não abre porta; não habilita o timer. Não atualiza um checkout existente automaticamente nem sobrescreve unidades diferentes.
+   O primeiro comando baixa a distribuição oficial do Node via HTTPS, verifica SHA-256 usando o manifesto oficial e testa o binário antes de instalá-lo em `/opt/cultura-node`. Instala somente o binário e sua licença, sem npm. Não muda o PATH nem atualiza runtimes existentes. Para testar apenas download/checksum sem instalar, use `bash automation/install-node.sh --check`.
+
+   O segundo comando cria o usuário sem login `cultura-importer`, clona para `/var/lib/cultura-importer/site` e registra unidades separadas. Não reinicia Koha, MySQL, Nginx ou túnel; não altera DNS/firewall; não abre porta; não habilita o timer. Não atualiza um checkout existente automaticamente nem sobrescreve unidades diferentes.
 
 3. Faça uma execução manual **pela unidade**, para aplicar os limites de recurso:
 
@@ -124,7 +127,7 @@ Publicações editadas no Instagram voltam como rascunho se a legenda mudou. Apr
 5. Para listar rascunhos sem acessar painel nem abrir porta:
 
    ```sh
-   sudo -u cultura-importer /usr/bin/node /var/lib/cultura-importer/site/automation/cli.mjs list
+   sudo -u cultura-importer /opt/cultura-node/current/bin/node /var/lib/cultura-importer/site/automation/cli.mjs list
    ```
 
    Copie `automation/state/drafts.json` e `automation/state/media/` para seu ambiente de desenvolvimento se quiser revisar/publicar de lá. Esses arquivos podem conter conteúdo ainda não aprovado: não exponha a pasta como site público. A aprovação e o PR podem ser feitos no ambiente em que você já tem acesso ao GitHub.
@@ -145,3 +148,5 @@ Se uma execução for interrompida à força e deixar `automation/state/lock`, v
 Os testes automatizados verificam classificação, parsing de HTML público de exemplo, bloqueios de rede, importação/revisão/publicação, escape de HTML, calendário e repetição sem duplicatas. O diretório de eventos e o calendário foram exercitados no Chromium. A tentativa de acesso real ao Instagram neste ambiente foi bloqueada pelo proxy (403), então **a coleta real ainda não foi demonstrada**. A VPS não foi acessada nem modificada.
 
 As instituições mostram até duas publicações recentes cada; oficinas, até seis; o portal, até seis; páginas de evento, até trinta. O arquivo de dados mantém as demais publicações aprovadas. A coleta de até seis posts por execução não é um espelho completo do histórico do Instagram. Se o Instagram não fornecer HTML público utilizável na VPS, desative o timer e use a importação manual, ou avalie a API oficial/serviço autorizado em uma etapa separada.
+
+O runtime privado não é atualizado automaticamente. O caminho e a versão instalada ficam em `/opt/cultura-node/releases/`; confira e planeje atualizações de segurança separadamente. Ao desativar o coletor, não remova esse diretório enquanto houver processo em uso. Nenhum arquivo em `/usr/bin` é criado ou substituído pelo instalador.

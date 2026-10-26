@@ -4,7 +4,7 @@ set -euo pipefail
 if [[ "${1:-}" != "--apply" ]]; then
   cat <<'TEXT'
 Instalação isolada do coletor (não hospeda site nem abre portas).
-Requer /usr/bin/node 22+, git e systemd já instalados.
+Requer Node privado em /opt/cultura-node/current/bin/node, git e systemd.
 Com --apply: cria o usuário cultura-importer, clona o repositório em
 /var/lib/cultura-importer/site e registra a unidade e o timer desativado.
 Não instala dependências do sistema, não altera Koha/MySQL/Cloudflare/túneis.
@@ -14,8 +14,8 @@ TEXT
   exit 0
 fi
 [[ $EUID -eq 0 ]] || { echo 'Execute com sudo.' >&2; exit 1; }
-[[ -x /usr/bin/node ]] || { echo '/usr/bin/node não encontrado. Não foi alterado.' >&2; exit 1; }
-/usr/bin/node -e 'if(Number(process.versions.node.split(".")[0])<22)process.exit(1)' || { echo 'Requer Node 22+. Não atualize o runtime do Koha por este script.' >&2; exit 1; }
+[[ -x /opt/cultura-node/current/bin/node ]] || { echo 'Node privado ausente. Execute primeiro: sudo bash automation/install-node.sh --apply' >&2; exit 1; }
+/opt/cultura-node/current/bin/node -e 'if(Number(process.versions.node.split(".")[0])<22)process.exit(1)' || { echo 'Runtime privado incompatível. Nenhum runtime do Koha foi alterado.' >&2; exit 1; }
 command -v git >/dev/null
 command -v systemctl >/dev/null
 command -v systemd-analyze >/dev/null

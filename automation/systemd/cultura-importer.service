@@ -9,7 +9,7 @@ Type=oneshot
 User=cultura-importer
 Group=cultura-importer
 WorkingDirectory=/var/lib/cultura-importer/site
-ExecStart=/usr/bin/node --max-old-space-size=64 automation/cli.mjs collect
+ExecStart=/opt/cultura-node/current/bin/node --max-old-space-size=64 automation/cli.mjs collect
 Environment=CULTURA_STATE_DIR=/var/lib/cultura-importer/site/automation/state
 UMask=0077
 TimeoutStartSec=240
