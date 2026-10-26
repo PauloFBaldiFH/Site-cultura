@@ -69,3 +69,5 @@ Atualize o sitemap, as referências e os dados estruturados ao acrescentar ou re
 ## Importação assistida de publicações
 
 O fluxo opcional de coleta, classificação por palavras-chave, rascunhos e revisão está em [automation/README.md](automation/README.md). O coletor não abre porta e não publica sozinho. A implantação na VPS é separada, com usuário e limites de recursos próprios, sem alterações no Koha. As páginas de FEMUSE, Canta Palotina e Domingueira estão em `eventos/` e recebem apenas conteúdo aprovado. Acesso ao Instagram sem API pode ser bloqueado; o serviço não deve ser tratado como ativo sem teste real na VPS.
+
+Os cartões de instituições têm altura independente, conforme o conteúdo, para evitar que notícias de um local estiquem os demais. Publicações dentro das instituições ficam recolhidas em um bloco expansível; as imagens mantêm suas proporções. Essa estrutura também é gerada pelo importador, preservando o ajuste em novas aprovações.

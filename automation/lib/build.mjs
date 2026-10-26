@@ -9,7 +9,11 @@ function cards(posts,prefix){return posts.map(post=>{
   const date=post.publishedAt?`<time datetime="${e(post.publishedAt)}">Publicado em ${e(new Intl.DateTimeFormat('pt-BR',{timeZone:'America/Sao_Paulo',dateStyle:'medium'}).format(new Date(post.publishedAt)))}</time>`:'';
   return `<article class="publication-card">${image}<div>${date}<h3>${e(post.title)}</h3><p>${e(post.text)}</p><a class="text-link" href="${e(post.url)}" target="_blank" rel="noopener noreferrer">Ver publicação no Instagram →</a></div></article>`;
 }).join('');}
-function section(posts,key,prefix){if(!posts.length)return '';return `<section class="publication-section" aria-label="Publicações sobre este assunto"><h2>Publicações da Cultura</h2><div class="publication-grid">${cards(posts,prefix)}</div></section>`;}
+function section(posts,key,prefix){
+  if(!posts.length)return '';
+  if(key.startsWith('espaco:'))return `<details class="institution-publications"><summary>Publicações da Cultura <span>${posts.length}</span></summary><div class="publication-grid">${cards(posts,prefix)}</div></details>`;
+  return `<section class="publication-section" aria-label="Publicações sobre este assunto"><h2>Publicações da Cultura</h2><div class="publication-grid">${cards(posts,prefix)}</div></section>`;
+}
 async function replaceBlock(file,key,content){
   let html=await fs.readFile(file,'utf8');const start=`<!-- publicacoes:${key}:start -->`,end=`<!-- publicacoes:${key}:end -->`;
   const a=html.indexOf(start),b=html.indexOf(end);if(a<0||b<a)throw Error(`Bloco ${key} não encontrado em ${file}`);
