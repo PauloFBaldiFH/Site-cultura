@@ -1,4 +1,6 @@
-# Importação assistida do Instagram
+# Importação do Instagram
+
+O modo de **publicação automática de posts novos, sem aprovação individual**, está em [AUTOMATIC.md](AUTOMATIC.md). Exige ativação explícita na VPS e uma credencial GitHub limitada ao repositório. As instruções abaixo descrevem o modo manual `collect`, que continua disponível.
 
 O portal continua no GitHub Pages. Um coletor HTTP em Node.js 22+ roda separadamente, sem servidor web, sem porta de entrada, sem Playwright/Chromium e sem dependências npm. Não exige chave Meta, senha ou cookies de sessão.
 
@@ -12,7 +14,7 @@ O portal continua no GitHub Pages. Um coletor HTTP em Node.js 22+ roda separadam
 4. `approve` salva a publicação revisada em `data/publicacoes.json` e gera HTML estático nas páginas correspondentes. Não envia nada ao GitHub.
 5. Revise `git diff`, crie uma branch e envie um PR com a conta que já usa para publicar. Só depois da mesclagem o conteúdo aparece no site público.
 
-Não configure push automático com credenciais pessoais no servidor do Koha. O coletor agendado não tem credenciais GitHub e não modifica os arquivos públicos. Não use a tarefa de coleta para aprovar conteúdo automaticamente.
+No modo manual `collect`, o coletor agendado não tem credenciais GitHub e não modifica arquivos públicos. Para o modo automático autorizado, siga AUTOMATIC.md: token fine-grained do GitHub em arquivo privado de root, entregue pelo systemd, sem credencial de Instagram e sem token em URLs ou no repositório.
 
 ## Categorias e páginas
 
