@@ -1,0 +1,11 @@
+[Unit]
+Description=Coleta diária de rascunhos da Cultura, fora do atendimento
+
+[Timer]
+OnCalendar=*-*-* 03:15:00 America/Sao_Paulo
+RandomizedDelaySec=45m
+Persistent=false
+Unit=cultura-importer.service
+
+[Install]
+WantedBy=timers.target

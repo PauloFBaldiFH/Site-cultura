@@ -1,0 +1,43 @@
+[Unit]
+Description=Coleta limitada de publicações públicas da Cultura (somente rascunhos)
+Wants=network-online.target
+After=network-online.target
+ConditionPathExists=/var/lib/cultura-importer/site/automation/cli.mjs
+
+[Service]
+Type=oneshot
+User=cultura-importer
+Group=cultura-importer
+WorkingDirectory=/var/lib/cultura-importer/site
+ExecStart=/usr/bin/node --max-old-space-size=64 automation/cli.mjs collect
+Environment=CULTURA_STATE_DIR=/var/lib/cultura-importer/site/automation/state
+UMask=0077
+TimeoutStartSec=240
+Restart=no
+CPUQuota=10%
+CPUWeight=10
+MemoryHigh=128M
+MemoryMax=192M
+MemorySwapMax=0
+TasksMax=20
+Nice=19
+IOWeight=10
+IOSchedulingClass=idle
+OOMPolicy=stop
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+RestrictNamespaces=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+SocketBindDeny=any
+ReadWritePaths=/var/lib/cultura-importer/site/automation/state
+InaccessiblePaths=-/etc/koha -/var/lib/koha -/var/log/koha -/var/spool/koha -/etc/mysql -/var/lib/mysql
+LogRateLimitIntervalSec=30s
+LogRateLimitBurst=20
