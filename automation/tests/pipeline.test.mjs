@@ -10,6 +10,8 @@ test('importação, revisão explícita, publicação estática, calendário e r
   try{
     await fs.cp(path.join(ROOT,'automation'),path.join(dir,'automation'),{recursive:true,filter:source=>!source.includes('/automation/state')});
     for(const name of ['index.html','oficinas','eventos','data'])await fs.cp(path.join(ROOT,name),path.join(dir,name),{recursive:true});
+    // Isolate the fixture from the real approved content shipped with the site.
+    await fs.writeFile(path.join(dir,'data/publicacoes.json'),'[]\n');
     const configPath=path.join(dir,'automation/config.json'),config=JSON.parse(await fs.readFile(configPath,'utf8'));config.downloadImages=false;await fs.writeFile(configPath,JSON.stringify(config));
     const state=path.join(dir,'automation/state');const run=(...args)=>spawnSync(process.execPath,[path.join(dir,'automation/cli.mjs'),...args],{cwd:dir,env:{...process.env,CULTURA_STATE_DIR:state},encoding:'utf8'});
     const input=path.join(dir,'input.json');await fs.writeFile(input,JSON.stringify([{url:'https://www.instagram.com/p/CULTURA_TEST/',text:'FEMUSE com violino na biblioteca. Texto <img src=x onerror=alert(1)> de teste.',publishedAt:'2026-10-26T12:00:00-03:00'}]));
