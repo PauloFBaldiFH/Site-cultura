@@ -5,6 +5,7 @@ import {setTimeout as delay} from 'node:timers/promises';
 import {canonicalPost,record,parseProfile,parsePost,fetchBounded,imageExtension} from './lib/core.mjs';
 import {ROOT,STATE,readJSON,writeJSON,locked} from './lib/storage.mjs';
 import {build} from './lib/build.mjs';
+import {GitHub,githubCredential,automaticPublish} from './lib/automatic.mjs';
 const config=await readJSON(path.join(ROOT,'automation/config.json'));
 const [command,...args]=process.argv.slice(2);
 const draftsFile=path.join(STATE,'drafts.json');
@@ -20,7 +21,7 @@ async function stage(inputs){
     if(old)drafts.splice(drafts.indexOf(old),1);drafts.push(draft);added++;
   }await writeJSON(draftsFile,drafts);return added;
 }
-async function collect(){
+async function collect({automatic=false}={}){
   if(!/^[a-zA-Z0-9_.]{1,30}$/.test(config.account))throw Error('Conta inválida');
   const cap=Math.min(6,Math.max(1,Number(config.maxPosts)||6));
   const html=(await fetchBounded(`https://www.instagram.com/${config.account}/`)).toString('utf8');
@@ -30,7 +31,8 @@ async function collect(){
     try{inputs.push(parsePost((await fetchBounded(url)).toString('utf8'),url,config.account));}catch(error){console.error(`Não foi possível importar ${url}: ${error.message}`);}
   }
   if(!inputs.length)throw Error('Nenhuma legenda pública foi extraída. Conteúdo existente preservado.');
-  console.log(`${await stage(inputs)} rascunho(s) novo(s). Nenhuma publicação automática.`);
+  const count=await stage(inputs);
+  console.log(automatic?`${count} item(ns) novo(s) coletado(s); verificando publicação automática.`:`${count} rascunho(s) novo(s). Nenhuma publicação automática.`);
 }
 async function approve(){
   const id=args[0];const value=name=>{const i=args.indexOf(name);return i<0?undefined:args[i+1];};
@@ -49,11 +51,12 @@ async function approve(){
 }
 try{
   if(!config||!Array.isArray(config.groups)||!Array.isArray(config.events))throw Error('Configuração inválida');
-  if(command==='collect')await locked(collect);
+  if(command==='auto')await locked(async()=>{const api=new GitHub(await githubCredential());await collect({automatic:true});const result=await automaticPublish(api);console.log(result.baseline?'Referência inicial registrada. Os próximos posts novos serão publicados automaticamente.':`${result.published} publicação(ões) enviada(s) ao GitHub${result.commit?' no commit '+result.commit:''}.`);});
+  else if(command==='collect')await locked(collect);
   else if(command==='import')await locked(async()=>{if(!args[0])throw Error('Informe o arquivo JSON de entrada');const file=path.resolve(args[0]);const stat=await fs.stat(file);if(stat.size>2*1024*1024)throw Error('Importação maior que 2 MiB');const inputs=JSON.parse(await fs.readFile(file,'utf8'));if(!Array.isArray(inputs)||inputs.length>50)throw Error('Use uma lista com no máximo 50 publicações');console.log(`${await stage(inputs)} rascunho(s). Nenhuma publicação automática.`);});
   else if(command==='list'){const drafts=await readJSON(draftsFile,[]);for(const d of drafts)console.log(JSON.stringify({id:d.id,status:d.status,url:d.url,text:d.text,suggestions:d.suggestions,imageWarning:d.imageWarning},null,2));if(!drafts.length)console.log('Nenhum rascunho.');}
   else if(command==='approve')await locked(approve);
   else if(command==='reject')await locked(async()=>{const drafts=await readJSON(draftsFile,[]),draft=drafts.find(d=>d.id===args[0]);if(!draft)throw Error('Rascunho não encontrado');draft.status='rejected';await writeJSON(draftsFile,drafts);console.log('Rascunho rejeitado.');});
   else if(command==='build')await locked(async()=>console.log(JSON.stringify(await build(config))));
-  else console.log('Node 22+ · comandos: collect | import ARQUIVO.json | list | approve ID --title "Título" --tags "oficina:violino,evento:femuse" [--text-file ARQUIVO.txt] [--event-date AAAA-MM-DD --event-time "19h" --venue "Local"] | reject ID | build');
+  else console.log('Node 22+ · comandos: auto (systemd) | collect | import ARQUIVO.json | list | approve ID --title "Título" --tags "oficina:violino,evento:femuse" [--text-file ARQUIVO.txt] [--event-date AAAA-MM-DD --event-time "19h" --venue "Local"] | reject ID | build');
 }catch(error){console.error(`Falha: ${error.message}${error.cause?.code ? ` (${error.cause.code})` : ""}`);process.exitCode=1;}
