@@ -1,0 +1,5 @@
+name = "cultura-cms-auth"
+main = "worker.mjs"
+compatibility_date = "2026-10-29"
+workers_dev = true
+# GITHUB_CLIENT_ID e GITHUB_CLIENT_SECRET devem ser cadastrados como secrets.

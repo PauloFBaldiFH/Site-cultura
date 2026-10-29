@@ -3,6 +3,7 @@ import path from 'node:path';
 import {escapeHTML as e,canonicalPost} from './core.mjs';
 import {ROOT,readJSON} from './storage.mjs';
 import {siteHeader,siteFooter,headLinks} from './layout.mjs';
+import {applyEditorial,paragraphs,editorialPhotos} from './editorial.mjs';
 const base='https://cultura.palotina.org';
 function cards(posts,prefix){return posts.map(post=>{
   if(!canonicalPost(post.url))throw Error('Publicação com URL inválida');
@@ -55,6 +56,8 @@ async function syncLayout(config){
   await fs.writeFile(path.join(ROOT,'404.html'),notFound);
 }
 export async function build(config){
+  config=structuredClone(config);
+  await applyEditorial(config);
   const posts=await readJSON(path.join(ROOT,'data/publicacoes.json'),[]);if(!Array.isArray(posts))throw Error('Arquivo público inválido');
   const ids=new Set();for(const post of posts){if(!post.id||ids.has(post.id)||typeof post.title!=='string'||typeof post.text!=='string'||!Array.isArray(post.tags))throw Error('Publicação pública inválida ou duplicada');ids.add(post.id);if(post.publishedAt&&!Number.isFinite(Date.parse(post.publishedAt)))throw Error('Data de publicação inválida');}
   const sorted=[...posts].sort((a,b)=>(b.publishedAt||'').localeCompare(a.publishedAt||'')||a.id.localeCompare(b.id));
@@ -79,7 +82,7 @@ export async function build(config){
     await fs.writeFile(path.join(ROOT,'index.html'),updated);
   }
   await fs.mkdir(path.join(ROOT,'eventos'),{recursive:true});
-  for(const event of config.events){if(!/^[a-z0-9-]+$/.test(event.id))throw Error('ID de evento inválido');const selected=sorted.filter(post=>post.tags.includes('evento:'+event.id));const content=selected.length?`<h2>Publicações sobre o evento</h2><div class="publication-grid">${cards(selected.slice(0,30),'../')}</div>`:'<p>A programação e os detalhes das próximas edições serão publicados aqui quando confirmados.</p>';await fs.writeFile(path.join(ROOT,'eventos',event.id+'.html'),page(event.name,event.description,'eventos/'+event.id+'.html',(gallery(config,event.id)||(event.edition?`<h2>Edição ${e(event.edition)}</h2><p>Registros desta edição serão reunidos nesta página.</p><div class="event-parts">${event.parts.map(part=>`<section><h3>${e(part)}</h3><p>As fotos deste acervo ainda não foram disponibilizadas no site.</p></section>`).join('')}</div>`:''))+content));}
+  for(const event of config.events){if(!/^[a-z0-9-]+$/.test(event.id))throw Error('ID de evento inválido');const selected=sorted.filter(post=>post.tags.includes('evento:'+event.id));const content=selected.length?`<h2>Publicações sobre o evento</h2><div class="publication-grid">${cards(selected.slice(0,30),'../')}</div>`:'<p>A programação e os detalhes das próximas edições serão publicados aqui quando confirmados.</p>';await fs.writeFile(path.join(ROOT,'eventos',event.id+'.html'),page(event.name,event.description,'eventos/'+event.id+'.html',(paragraphs(event.body||'')+editorialPhotos(event.photos||[])+(gallery(config,event.id)||(event.edition?`<h2>Edição ${e(event.edition)}</h2><p>Registros desta edição serão reunidos nesta página.</p><div class="event-parts">${event.parts.map(part=>`<section><h3>${e(part)}</h3><p>As fotos deste acervo ainda não foram disponibilizadas no site.</p></section>`).join('')}</div>`:'')))+content));}
   const eventLinks=config.events.filter(event=>event.visible!==false).map(event=>`<article class="event-category">${cover(config,event.id,'../')}<span class="eyebrow">EVENTO CULTURAL</span><h2>${e(event.name)}</h2><p>${e(event.description)}</p><a class="button primary" href="${e(event.id)}.html">Conhecer o evento →</a></article>`).join('');
   await fs.writeFile(path.join(ROOT,'eventos/index.html'),page('Eventos culturais em Palotina','Explore os registros de Canta Palotina e FEMUSE em Palotina.','eventos/index.html',`<div class="events-directory">${eventLinks}</div>`));
   const calendar=sorted.filter(p=>p.eventDate).map(p=>({date:p.eventDate,title:p.title,time:p.eventTime||'',location:p.eventLocation||''}));

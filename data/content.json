@@ -1,0 +1,357 @@
+{
+  "home": {
+    "title": "Arte e cultura.",
+    "accent": "Para toda Palotina.",
+    "intro": "Conheça nossas oficinas, explore os espaços culturais e participe da vida cultural da cidade."
+  },
+  "events": [
+    {
+      "id": "femuse",
+      "name": "FEMUSE",
+      "description": "Publicações e informações sobre o FEMUSE compartilhadas pela Cultura de Palotina.",
+      "edition": "2026",
+      "visible": true,
+      "body": "",
+      "photos": []
+    },
+    {
+      "id": "canta-palotina",
+      "name": "Canta Palotina",
+      "description": "Publicações e informações sobre o Canta Palotina.",
+      "edition": "2026",
+      "visible": true,
+      "body": "",
+      "photos": []
+    },
+    {
+      "id": "domingueira",
+      "name": "Domingueira",
+      "description": "Publicações e informações sobre a Domingueira em Palotina.",
+      "edition": "",
+      "visible": false,
+      "body": "",
+      "photos": []
+    },
+    {
+      "id": "cultura-expo",
+      "name": "Cultura Expo",
+      "description": "Conteúdo e registros da Cultura Expo em Palotina.",
+      "edition": "2026",
+      "visible": false,
+      "body": "",
+      "photos": []
+    },
+    {
+      "id": "curso-biscuit",
+      "name": "Curso Biscuit",
+      "description": "Conteúdo e registros do Curso Biscuit em Palotina.",
+      "edition": "2026",
+      "visible": false,
+      "body": "",
+      "photos": []
+    }
+  ],
+  "spaces": [
+    {
+      "id": "departamento",
+      "name": "Departamento de Cultura",
+      "description": "O principal espaço de gestão, fomento e realização de atividades artísticas e culturais de Palotina.",
+      "information": [
+        {
+          "label": "ENDEREÇO",
+          "text": "Rua Eurico Gaspar Dutra, 706 — Centro\nPalotina — PR"
+        },
+        {
+          "label": "ATENDIMENTO",
+          "text": "7h30 às 11h30 · 13h30 às 17h30"
+        }
+      ]
+    },
+    {
+      "id": "biblioteca",
+      "name": "Biblioteca Pública Municipal Castro Alves",
+      "description": "Um espaço para descobrir histórias, ampliar conhecimentos e explorar o acervo pelo catálogo online.",
+      "information": [
+        {
+          "label": "ENDEREÇO",
+          "text": "Rua Ipiranga, 720 — Centro\nPalotina — PR"
+        },
+        {
+          "label": "ATENDIMENTO",
+          "text": "Segunda a sexta-feira · 8h às 11h30 e 13h30 às 17h30"
+        }
+      ]
+    },
+    {
+      "id": "teatro",
+      "name": "Teatro Municipal Ludovico Riedi",
+      "description": "Um espaço amplo, moderno e equipado para apresentações artísticas, espetáculos musicais, peças teatrais e eventos locais.",
+      "information": [
+        {
+          "label": "ENDEREÇO",
+          "text": "Rua Getúlio Vargas — Centro\nPalotina — PREntrada, estacionamento e banheiros acessíveis para pessoas em cadeira de rodas."
+        },
+        {
+          "label": "ATENDIMENTO",
+          "text": "Consulte o Departamento de Cultura sobre as atividades do teatro."
+        }
+      ]
+    },
+    {
+      "id": "museu",
+      "name": "Museu Municipal Antônio Bernardino Daniel",
+      "description": "Também conhecido como Museu Público de Palotina. Seu acervo reúne peças, documentos e objetos antigos doados por pioneiros da região, do mundo analógico ao digital.",
+      "information": [
+        {
+          "label": "ENDEREÇO",
+          "text": "Rua 24 de Junho, s/n — Lago Municipal\nPalotina — PREntrada gratuita."
+        },
+        {
+          "label": "VISITAÇÃO",
+          "text": "Confirme os horários por telefone antes de visitar."
+        }
+      ]
+    },
+    {
+      "id": "gasparzinho",
+      "name": "Escola Municipal de Artes Gasparzinho",
+      "description": "Uma instituição pública de ensino em Palotina, Paraná, voltada ao desenvolvimento artístico, cultural e educacional de crianças.",
+      "information": [
+        {
+          "label": "ARTE DESDE A INFÂNCIA",
+          "text": "Um espaço dedicado à formação artística e cultural das crianças do município."
+        },
+        {
+          "label": "INFORMAÇÕES SOBRE A ESCOLA",
+          "text": "Consulte o Departamento de Cultura para confirmar endereço, atendimento e informações sobre as atividades da escola."
+        }
+      ]
+    }
+  ],
+  "workshops": [
+    {
+      "id": "artesanato",
+      "name": "Artesanato",
+      "paragraphs": [
+        "A oficina de Artesanato integra as atividades do Departamento de Cultura de Palotina, na área de artes e expressão.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "croche",
+      "name": "Crochê",
+      "paragraphs": [
+        "A oficina de Crochê integra as atividades do Departamento de Cultura de Palotina, na área de artes e expressão.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "desenho-artistico",
+      "name": "Desenho artístico",
+      "paragraphs": [
+        "A oficina de Desenho artístico integra as atividades do Departamento de Cultura de Palotina, na área de artes e expressão.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "teatro",
+      "name": "Teatro",
+      "paragraphs": [
+        "A oficina de Teatro integra as atividades do Departamento de Cultura de Palotina, na área de artes e expressão.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "arte-circense",
+      "name": "Arte circense",
+      "paragraphs": [
+        "A oficina de Arte circense integra as atividades do Departamento de Cultura de Palotina, na área de artes e expressão.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "corpo-coreografico",
+      "name": "Corpo coreográfico",
+      "paragraphs": [
+        "A oficina de Corpo coreográfico integra as atividades do Departamento de Cultura de Palotina, na área de dança.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "baliza",
+      "name": "Baliza",
+      "paragraphs": [
+        "A oficina de Baliza integra as atividades do Departamento de Cultura de Palotina, na área de dança.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "danca-espanhola",
+      "name": "Dança espanhola",
+      "paragraphs": [
+        "A oficina de Dança espanhola integra as atividades do Departamento de Cultura de Palotina, na área de dança.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "zumba",
+      "name": "Zumba",
+      "paragraphs": [
+        "A oficina de Zumba integra as atividades do Departamento de Cultura de Palotina, na área de dança.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "frevo-e-ritmos",
+      "name": "Frevo e ritmos",
+      "paragraphs": [
+        "A oficina de Frevo e ritmos integra as atividades do Departamento de Cultura de Palotina, na área de dança.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "danca-alema",
+      "name": "Dança alemã",
+      "paragraphs": [
+        "A oficina de Dança alemã integra as atividades do Departamento de Cultura de Palotina, na área de dança.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "hip-hop",
+      "name": "Hip hop",
+      "paragraphs": [
+        "A oficina de Hip hop integra as atividades do Departamento de Cultura de Palotina, na área de dança.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "invernada-artistica",
+      "name": "Invernada artística",
+      "paragraphs": [
+        "A oficina de Invernada artística integra as atividades do Departamento de Cultura de Palotina, na área de dança.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "danca-italiana",
+      "name": "Dança italiana",
+      "paragraphs": [
+        "A oficina de Dança italiana integra as atividades do Departamento de Cultura de Palotina, na área de dança.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "danca-de-salao",
+      "name": "Dança de salão",
+      "paragraphs": [
+        "A oficina de Dança de salão integra as atividades do Departamento de Cultura de Palotina, na área de dança.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "aulas-de-canto",
+      "name": "Aulas de canto",
+      "paragraphs": [
+        "A oficina de Aulas de canto integra as atividades do Departamento de Cultura de Palotina, na área de música.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "canto-italiano",
+      "name": "Canto italiano",
+      "paragraphs": [
+        "A oficina de Canto italiano integra as atividades do Departamento de Cultura de Palotina, na área de música.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "coral-municipal",
+      "name": "Coral municipal",
+      "paragraphs": [
+        "A oficina de Coral municipal integra as atividades do Departamento de Cultura de Palotina, na área de música.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "coral-infantil",
+      "name": "Coral infantil",
+      "paragraphs": [
+        "A oficina de Coral infantil integra as atividades do Departamento de Cultura de Palotina, na área de música.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "fanfarra",
+      "name": "Fanfarra",
+      "paragraphs": [
+        "A oficina de Fanfarra integra as atividades do Departamento de Cultura de Palotina, na área de música.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "musicalizacao",
+      "name": "Musicalização",
+      "paragraphs": [
+        "A oficina de Musicalização integra as atividades do Departamento de Cultura de Palotina, na área de música.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "viola-caipira",
+      "name": "Viola caipira",
+      "paragraphs": [
+        "A oficina de Viola caipira integra as atividades do Departamento de Cultura de Palotina, na área de música.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "bateria",
+      "name": "Bateria",
+      "paragraphs": [
+        "A oficina de Bateria integra as atividades do Departamento de Cultura de Palotina, na área de música.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "saxofone",
+      "name": "Saxofone",
+      "paragraphs": [
+        "A oficina de Saxofone integra as atividades do Departamento de Cultura de Palotina, na área de música.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "violino",
+      "name": "Violino",
+      "paragraphs": [
+        "A oficina de Violino integra as atividades do Departamento de Cultura de Palotina, na área de música.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "clarinete",
+      "name": "Clarinete",
+      "paragraphs": [
+        "A oficina de Clarinete integra as atividades do Departamento de Cultura de Palotina, na área de música.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "flauta-transversal",
+      "name": "Flauta transversal",
+      "paragraphs": [
+        "A oficina de Flauta transversal integra as atividades do Departamento de Cultura de Palotina, na área de música.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    },
+    {
+      "id": "banda-sinfonica",
+      "name": "Banda Sinfônica",
+      "paragraphs": [
+        "A oficina de Banda Sinfônica integra as atividades do Departamento de Cultura de Palotina, na área de música.",
+        "Para conhecer as turmas, os horários e a disponibilidade de vagas, fale com a equipe. Informações específicas sobre as aulas serão acrescentadas nesta página."
+      ]
+    }
+  ]
+}

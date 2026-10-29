@@ -81,3 +81,7 @@ Cabeçalho e rodapé das páginas internas e o rodapé da página inicial vêm d
 As imagens exibidas são versões WebP otimizadas: `assets/espacos/` (ilustrações dos espaços em 800 e 1600 px), `assets/logo-cultura*.webp`, `assets/favicon.png` e `assets/oficinas-ilustradas.webp`. Os arquivos originais continuam em `assets/` como fonte. Ao acrescentar fotos aos acervos, rode `python3 automation/prepare-gallery.py` e depois o build: o script gera a miniatura, a versão ampliada leve em `assets/galerias/ampliadas/` (usada pelo visualizador) e ignora arquivos idênticos enviados mais de uma vez. O original fica acessível pelo link “Abrir foto original”. Álbuns com mais de 24 fotos mostram as primeiras e um botão “Ver mais”.
 
 Na página inicial, os cartões dos espaços aparecem compactos; endereço, contatos e publicações continuam no HTML e são exibidos nas páginas de cada espaço em `espacos/`.
+
+### Edição pelo navegador
+
+Decap CMS instalado em `/admin/`, com formulários para início, eventos, espaços e oficinas. O conteúdo é salvo no GitHub com rascunhos para revisão. A ativação exige configurar o OAuth e selecionar GitHub Actions como fonte do Pages: veja [admin/README.md](admin/README.md). Não requer alterações no servidor do Koha.

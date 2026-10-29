@@ -22,8 +22,9 @@ test('data de evento só é criada com ano explícito, contexto e sem ambiguidad
  assert.equal(confirmedDate('FEMUSE\nData: 10/12/2026\nHorário: 19h\nLocal: Teatro',['evento:femuse']).eventDate,'2026-12-10');
 });
 test('publicação sem revisão: baseline, categorias, snapshot atual, idempotência, falha e recuperação',async()=>{
- const files=new Map();for(const file of new Set(['data/publicacoes.json','automation/config.json','index.html',...config.groups.map(g=>g.url.split('#')[0])]))files.set(file,await fs.readFile(path.join(root,file)));
+ const files=new Map();for(const file of new Set(['data/publicacoes.json','data/content.json','automation/config.json','index.html',...config.groups.map(g=>g.url.split('#')[0])]))files.set(file,await fs.readFile(path.join(root,file)));
  files.set('index.html',Buffer.from(files.get('index.html').toString().replace('<main id="conteudo">','<main id="conteudo" data-edicao-preservada="sim">')));
+ const editorial=JSON.parse(files.get('data/content.json'));editorial.home.title='Título editorial remoto';files.set('data/content.json',Buffer.from(JSON.stringify(editorial)));
  const initial=files.get('data/publicacoes.json').toString();let commits=0,fail=false;
  const api={snapshot:async()=>({head:'a'.repeat(40),tree:'b'.repeat(40),files:new Map([...files].map(([p,b])=>[p,hash(b)]))}),read:async(_,file)=>files.get(file),commit:async(_,outputs)=>{if(fail)throw Error('Conflito de atualização');for(const [p,b]of outputs)files.set(p,b);commits++;return String(commits).repeat(40);}};
  await fs.writeFile(path.join(directory,'drafts.json'),'[]');
@@ -32,6 +33,7 @@ test('publicação sem revisão: baseline, categorias, snapshot atual, idempotê
  await fs.writeFile(path.join(directory,'drafts.json'),JSON.stringify([draft]));
  assert.equal((await automaticPublish(api)).published,1);assert.equal(commits,1);
  const publicPosts=JSON.parse(files.get('data/publicacoes.json'));const post=publicPosts.find(p=>p.id===draft.id);assert(post.tags.includes('evento:femuse'));assert(post.tags.includes('oficina:violino'));assert(post.tags.includes('espaco:biblioteca'));assert.equal(post.eventDate,'2026-12-10');
+ assert(files.get('index.html').toString().includes('Título editorial remoto'));
  assert(files.get('index.html').toString().includes('data-edicao-preservada="sim"'));assert(files.get('index.html').toString().includes('&lt;script&gt;alert'));
  assert(files.get('eventos/femuse.html').toString().includes('FEMUSE com violino'));assert(files.get('oficinas/violino.html').toString().includes('FEMUSE com violino'));
  assert.equal(JSON.parse(await fs.readFile(path.join(directory,'drafts.json')))[0].status,'published');

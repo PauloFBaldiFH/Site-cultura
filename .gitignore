@@ -1,2 +1,5 @@
 automation/state/
 *.tmp
+_site/
+automation/oauth/.wrangler/
+automation/oauth/.dev.vars

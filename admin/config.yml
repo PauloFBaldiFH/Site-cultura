@@ -1,0 +1,205 @@
+{
+  "backend": {
+    "name": "github",
+    "repo": "PauloFBaldiFH/Site-cultura",
+    "branch": "main",
+    "base_url": "https://configure-oauth.invalid",
+    "auth_endpoint": "auth"
+  },
+  "publish_mode": "editorial_workflow",
+  "locale": "pt",
+  "site_url": "https://cultura.palotina.org",
+  "display_url": "https://cultura.palotina.org",
+  "media_folder": "assets/uploads",
+  "public_folder": "/assets/uploads",
+  "media_library": {
+    "config": {
+      "max_file_size": 5242880
+    }
+  },
+  "slug": {
+    "encoding": "ascii",
+    "clean_accents": true,
+    "sanitize_replacement": "-"
+  },
+  "collections": [
+    {
+      "name": "site",
+      "label": "Conteúdo do site",
+      "editor": {
+        "preview": false
+      },
+      "files": [
+        {
+          "name": "content",
+          "label": "Página inicial, eventos, espaços e oficinas",
+          "file": "data/content.json",
+          "format": "json",
+          "fields": [
+            {
+              "name": "home",
+              "label": "Página inicial",
+              "widget": "object",
+              "fields": [
+                {
+                  "name": "title",
+                  "label": "Título",
+                  "widget": "string"
+                },
+                {
+                  "name": "accent",
+                  "label": "Segunda linha do título",
+                  "widget": "string"
+                },
+                {
+                  "name": "intro",
+                  "label": "Apresentação",
+                  "widget": "text"
+                }
+              ]
+            },
+            {
+              "name": "events",
+              "label": "Eventos",
+              "widget": "list",
+              "allow_add": false,
+              "allow_delete": false,
+              "minimize_collapsed": true,
+              "summary": "{{fields.name}}",
+              "fields": [
+                {
+                  "name": "id",
+                  "label": "Identificador (não alterar)",
+                  "widget": "hidden"
+                },
+                {
+                  "name": "name",
+                  "label": "Nome",
+                  "widget": "string"
+                },
+                {
+                  "name": "description",
+                  "label": "Apresentação",
+                  "widget": "text"
+                },
+                {
+                  "name": "edition",
+                  "label": "Edição",
+                  "widget": "string",
+                  "required": false
+                },
+                {
+                  "name": "visible",
+                  "label": "Mostrar nos cards",
+                  "widget": "boolean"
+                },
+                {
+                  "name": "body",
+                  "label": "Conteúdo do evento",
+                  "widget": "text",
+                  "required": false,
+                  "hint": "Separe os parágrafos com uma linha em branco. Não use HTML."
+                },
+                {
+                  "name": "photos",
+                  "label": "Fotos adicionais",
+                  "widget": "list",
+                  "required": false,
+                  "summary": "{{fields.caption}}",
+                  "fields": [
+                    {
+                      "name": "image",
+                      "label": "Foto",
+                      "widget": "image",
+                      "allow_multiple": false
+                    },
+                    {
+                      "name": "caption",
+                      "label": "Descrição da foto",
+                      "widget": "string"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "spaces",
+              "label": "Espaços culturais",
+              "widget": "list",
+              "allow_add": false,
+              "allow_delete": false,
+              "minimize_collapsed": true,
+              "summary": "{{fields.name}}",
+              "fields": [
+                {
+                  "name": "id",
+                  "label": "Identificador (não alterar)",
+                  "widget": "hidden"
+                },
+                {
+                  "name": "name",
+                  "label": "Nome",
+                  "widget": "string"
+                },
+                {
+                  "name": "description",
+                  "label": "Apresentação",
+                  "widget": "text"
+                },
+                {
+                  "name": "information",
+                  "label": "Endereço e atendimento",
+                  "widget": "list",
+                  "summary": "{{fields.label}}",
+                  "fields": [
+                    {
+                      "name": "label",
+                      "label": "Título do bloco",
+                      "widget": "string"
+                    },
+                    {
+                      "name": "text",
+                      "label": "Informações",
+                      "widget": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "workshops",
+              "label": "Oficinas",
+              "widget": "list",
+              "allow_add": false,
+              "allow_delete": false,
+              "minimize_collapsed": true,
+              "summary": "{{fields.name}}",
+              "fields": [
+                {
+                  "name": "id",
+                  "label": "Identificador (não alterar)",
+                  "widget": "hidden"
+                },
+                {
+                  "name": "name",
+                  "label": "Nome de referência",
+                  "widget": "hidden"
+                },
+                {
+                  "name": "paragraphs",
+                  "label": "Parágrafos da página",
+                  "widget": "list",
+                  "field": {
+                    "name": "text",
+                    "label": "Texto",
+                    "widget": "text"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

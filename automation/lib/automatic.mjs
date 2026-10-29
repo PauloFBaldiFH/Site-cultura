@@ -19,7 +19,7 @@ export class GitHub {
     return JSON.parse(Buffer.concat(chunks).toString('utf8'));
   }
   async snapshot(){const ref=await this.request('GET',`/git/ref/heads/${branch}`);const commit=await this.request('GET',`/git/commits/${ref.object.sha}`);const tree=await this.request('GET',`/git/trees/${commit.tree.sha}?recursive=1`);if(tree.truncated)throw Error('Árvore GitHub incompleta');return {head:ref.object.sha,tree:commit.tree.sha,files:new Map(tree.tree.filter(e=>e.type==='blob'&&e.mode==='100644').map(e=>[e.path,e.sha]))};}
-  async read(snapshot,file){if(!safeFile(file)&&file!=='automation/config.json')throw Error('Arquivo de entrada não permitido');const sha=snapshot.files.get(file);if(!sha)throw Error(`Arquivo necessário não encontrado: ${file}`);const blob=await this.request('GET',`/git/blobs/${sha}`);if(blob.encoding!=='base64')throw Error('Codificação GitHub inesperada');const bytes=Buffer.from(blob.content.replace(/\s/g,''),'base64');if(bytes.length>2*1024*1024)throw Error('Arquivo de entrada maior que 2 MiB');return bytes;}
+  async read(snapshot,file){if(!safeFile(file)&&file!=='automation/config.json'&&file!=='data/content.json')throw Error('Arquivo de entrada não permitido');const sha=snapshot.files.get(file);if(!sha)throw Error(`Arquivo necessário não encontrado: ${file}`);const blob=await this.request('GET',`/git/blobs/${sha}`);if(blob.encoding!=='base64')throw Error('Codificação GitHub inesperada');const bytes=Buffer.from(blob.content.replace(/\s/g,''),'base64');if(bytes.length>2*1024*1024)throw Error('Arquivo de entrada maior que 2 MiB');return bytes;}
   async commit(snapshot,outputs,count){
     const changes=[];for(const [file,bytes]of outputs){if(!safeFile(file))throw Error('Tentativa de alterar arquivo não permitido');if(gitHash(bytes)===snapshot.files.get(file))continue;
       if(file.startsWith('assets/')){const blob=await this.request('POST','/git/blobs',{content:bytes.toString('base64'),encoding:'base64'});changes.push({path:file,mode:'100644',type:'blob',sha:blob.sha});}
@@ -62,9 +62,10 @@ export async function automaticPublish(api,{now=new Date()}={}){
   const config=JSON.parse((await api.read(snapshot,'automation/config.json')).toString('utf8'));validateConfig(config);
   const temporary=await fs.mkdtemp(path.join(STATE,'automatic-run-'));
   try{
-    await fs.mkdir(path.join(temporary,'automation/lib'),{recursive:true});for(const name of ['build.mjs','layout.mjs','storage.mjs','core.mjs'])await fs.copyFile(path.join(ROOT,'automation/lib',name),path.join(temporary,'automation/lib',name));
+    await fs.mkdir(path.join(temporary,'automation/lib'),{recursive:true});for(const name of ['build.mjs','layout.mjs','storage.mjs','core.mjs','editorial.mjs'])await fs.copyFile(path.join(ROOT,'automation/lib',name),path.join(temporary,'automation/lib',name));
     const inputPaths=new Set(['index.html',...config.groups.map(group=>group.url.split('#')[0])]);
     for(const file of inputPaths){const bytes=await api.read(snapshot,file);await fs.mkdir(path.dirname(path.join(temporary,file)),{recursive:true});await fs.writeFile(path.join(temporary,file),bytes);}
+    if(snapshot.files.has('data/content.json')){await fs.mkdir(path.join(temporary,'data'),{recursive:true});await fs.writeFile(path.join(temporary,'data/content.json'),await api.read(snapshot,'data/content.json'));}
     const media=new Map(),added=[];
     for(const draft of pending){const checked=record(draft,config);if(checked.id!==draft.id)throw Error('ID do rascunho não corresponde ao link');
       const tags=classify(checked.text,config).map(item=>item.id);if(!tags.length)tags.push('noticia:geral');
