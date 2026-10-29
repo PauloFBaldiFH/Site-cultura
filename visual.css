@@ -19,3 +19,76 @@ body{font-family:'DM Sans',system-ui,sans-serif}h1,h2,h3{font-family:Manrope,sys
 /* Acervo: miniaturas leves; originais carregados apenas ao ampliar. */
 .photo-collection{margin:40px 0}.photo-album{margin:30px 0}.photo-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.gallery-photo{display:block;border-radius:8px;overflow:hidden;background:#e8eddf}.gallery-photo img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;transition:transform .2s}.gallery-photo:hover img{transform:scale(1.04)}.gallery-photo:focus-visible{outline:3px solid #b8522e;outline-offset:3px}.event-card-cover{display:block;width:100%;height:160px;object-fit:cover;border-radius:8px}.photo-viewer{width:min(1100px,95vw);max-height:94dvh;padding:16px;border:0;border-radius:12px;background:#142b26;color:white}.photo-viewer::backdrop{background:#000c}.photo-viewer img{display:block;width:100%;height:72dvh;object-fit:contain}.photo-viewer-toolbar{display:flex;align-items:center;gap:15px;margin-bottom:10px}.photo-viewer-toolbar button{padding:10px 15px;cursor:pointer;border:1px solid #aab8ae;border-radius:6px;background:#fff;color:#193d34}.photo-viewer-toolbar [data-close]{margin-left:auto}.photo-viewer>a{display:inline-block;margin-top:12px;color:white}@media(max-width:800px){.photo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:500px){.photo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}}
 .album-videos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.album-videos figure{margin:0}.album-videos video{display:block;width:100%;height:300px;background:#142b26;border-radius:8px}.album-videos figcaption{font-size:13px;margin-top:8px}@media(max-width:650px){.album-videos{grid-template-columns:1fr}}
+
+/* Acessibilidade: atalho para o conteúdo principal. */
+.skip-link{position:absolute;left:16px;top:-60px;z-index:20;padding:12px 18px;border-radius:6px;background:var(--green);color:#fff;font-size:13px;font-weight:600}
+.skip-link:focus{top:12px}
+.search svg{flex-shrink:0;color:var(--muted)}
+.workshop-card .space-label,.event-highlight>.eyebrow{font-size:10px;color:#3f5249}
+
+/* Cartões de oficina inteiramente clicáveis, com chamada discreta. */
+.workshop-card{position:relative}
+.workshop-card .card-link{margin-top:auto;font-size:12px;font-weight:700;color:var(--accent-orange)}
+.workshop-card .card-link::after{content:"";position:absolute;inset:0;border-radius:inherit}
+.workshop-card:hover h3{color:var(--accent-orange)}
+.workshop-card:focus-within{outline:3px solid #b64a25;outline-offset:3px}
+.workshop-card .card-link:focus-visible{outline:none}
+.workshop-card h3{margin-bottom:12px}
+
+/* Destaques de eventos ocupam a linha inteira, com qualquer quantidade de cartões. */
+.event-highlights{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.event-highlight .event-card-cover{height:240px}
+
+/* Página inicial: espaços em cartões compactos; detalhes ficam na página de cada espaço. */
+.spaces .institutions-grid{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+.spaces .institution-card{display:flex;flex-direction:column;position:relative;transition:transform .18s,box-shadow .18s}
+.spaces .institution-card:hover{transform:translateY(-3px);box-shadow:0 9px 22px #193d350c}
+.spaces .institution-card:focus-within{outline:3px solid #b8522e;outline-offset:3px}
+.spaces .institution-image-link{position:static}
+.spaces .institution-image-link::after{content:"";position:absolute;inset:0;z-index:1;border-radius:inherit}
+.spaces .institution-image-link:focus-visible{outline:none}
+.spaces .institution-image-link>span,.spaces .institution-info,.spaces .institution-publications,.spaces .institution-actions{display:none}
+.spaces .institution-image-link .institution-image{aspect-ratio:16/10;padding:12px;min-height:0}
+.spaces .institution-body{padding:22px 24px 24px}
+.spaces .institution-body h3{font-size:22px;margin:10px 0 8px}
+.spaces .institution-body::after{content:"Conhecer o espaço →";margin-top:auto;padding-top:14px;font-size:12px;font-weight:700;color:var(--accent-orange)}
+@media(max-width:1000px){.spaces .institutions-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px){.spaces .institutions-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){.spaces .institution-card{transition:none}
+.spaces .institution-card:hover{transform:none}
+}
+
+/* Textos das publicações resumidos; o texto completo fica no Instagram. */
+.publication-card p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:5;overflow:hidden}
+
+/* Galerias: fotos recolhidas e botão para ver o restante do álbum. */
+.gallery-photo[hidden]{display:none}
+.photo-more{margin-top:16px;padding:12px 20px;border:1px solid #c7d0bf;border-radius:24px;background:#fafbf6;color:var(--green);font-size:13px;font-weight:600;cursor:pointer}
+.photo-more:hover{background:#ecefe3}
+
+/* Navegação de volta no topo das páginas internas. */
+.page-back{display:inline-block;margin-bottom:22px}
+.not-found{min-height:50vh}
+.not-found .actions{flex-wrap:wrap}
+
+/* Rodapé completo, igual em todas as páginas. */
+.site-footer{display:grid;grid-template-columns:1.3fr repeat(3,minmax(0,1fr));gap:30px 40px;align-items:start;padding:50px 7% 22px}
+.site-footer .brand img{width:60px;height:60px}
+.site-footer .footer-brand p{margin:18px 0 0;font-size:19px;line-height:1.4}
+.site-footer h2{font:700 10px/1.4 'DM Sans',system-ui,sans-serif;letter-spacing:1.6px;text-transform:uppercase;color:#d3d7bf;margin:6px 0 14px}
+.footer-column{display:flex;flex-direction:column;align-items:start;gap:9px}
+.footer-column p{margin:0 0 6px;font:13px/1.65 'DM Sans',system-ui,sans-serif;color:#e7ebdf;font-style:normal}
+.footer-column a{font-size:13px;color:#f5f3e8}
+.footer-column a:hover,.footer-bottom a:hover{color:#f5ca62}
+.site-footer a:focus-visible{outline-color:#f5ca62}
+.site-footer .footer-bottom{grid-column:1/-1;margin-top:10px;align-items:center}
+@media(max-width:900px){.site-footer{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:560px){.site-footer{grid-template-columns:1fr;padding:38px 6% 20px}
+}
+.logo-disc img{height:auto}
+.spaces .institution-image-link{align-self:stretch}
+.spaces .space-links{display:none}
+.spaces .institution-image-link .institution-image{object-fit:cover;padding:0}

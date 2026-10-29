@@ -12,8 +12,8 @@
 
 .workshop-table{margin-top:20px;border-top:1px solid var(--line)}.workshop-table summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 0;cursor:pointer;font-size:13px;font-weight:600}.workshop-table[open] summary span{transform:rotate(45deg)}.workshop-table .table-wrap{margin-bottom:20px}
 
-.workshop-illustration{width:100%;aspect-ratio:5/3;background-image:url('assets/oficinas-ilustradas.png');background-size:400% 700%;background-repeat:no-repeat;background-color:#e9ecdc}.workshop-illustration.workshop-cover{height:auto;max-width:720px;border-radius:12px}
-.workshop-illustration{position:relative;overflow:hidden;background-image:none}.workshop-card>.workshop-illustration{padding:0}.workshop-illustration::before{content:"";position:absolute;inset:0;background-image:url('assets/oficinas-ilustradas.png');background-size:400% 700%;background-position:inherit;background-repeat:no-repeat;transform:scale(1.22)}
+.workshop-illustration{width:100%;aspect-ratio:5/3;background-image:url('assets/oficinas-ilustradas.webp');background-size:400% 700%;background-repeat:no-repeat;background-color:#e9ecdc}.workshop-illustration.workshop-cover{height:auto;max-width:720px;border-radius:12px}
+.workshop-illustration{position:relative;overflow:hidden;background-image:none}.workshop-card>.workshop-illustration{padding:0}.workshop-illustration::before{content:"";position:absolute;inset:0;background-image:url('assets/oficinas-ilustradas.webp');background-size:400% 700%;background-position:inherit;background-repeat:no-repeat;transform:scale(1.22)}
 
 .workshop-illustration::before{background-size:inherit;transform:scale(1.02)}
 
