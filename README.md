@@ -10,7 +10,7 @@ Na pasta `/workspace/Site-cultura`, execute:
 python3 -m http.server 3000 --bind 0.0.0.0
 ```
 
-O conteúdo é estático. Publique `index.html`, `style.css`, `visual.css`, `app.js`, `calendar.js`, `calendar-config.js`, `map.js` e as pastas `assets`, `vendor` e `oficinas` em uma hospedagem estática com HTTPS.
+O conteúdo é estático. Publique `index.html`, `404.html`, `style.css`, `visual.css`, `site.js`, `app.js`, `gallery.js`, `calendar.js`, `calendar-config.js`, `map.js` e as pastas `assets`, `vendor`, `oficinas`, `espacos` e `eventos` em uma hospedagem estática com HTTPS.
 
 ## Conteúdo
 
@@ -56,7 +56,7 @@ O Departamento de Cultura usa o ponto fixo confirmado pelo usuário: latitude **
 
 ## Descoberta e compartilhamento
 
-O site usa `https://cultura.palotina.org` como endereço canônico. `sitemap.xml` lista as 29 páginas; `robots.txt` permite rastreamento e aponta ao sitemap. Após publicar, envie `https://cultura.palotina.org/sitemap.xml` ao Google Search Console. Esses arquivos não garantem indexação ou posição nas buscas.
+O site usa `https://cultura.palotina.org` como endereço canônico. `sitemap.xml` lista as 40 páginas; `robots.txt` permite rastreamento e aponta ao sitemap. Após publicar, envie `https://cultura.palotina.org/sitemap.xml` ao Google Search Console. Esses arquivos não garantem indexação ou posição nas buscas.
 
 As páginas têm títulos, descrições, metadados Open Graph/Twitter e dados estruturados JSON-LD: organização e lista de oficinas na página inicial, página e navegação hierárquica nas oficinas. Os cartões também estão no HTML inicial para serem encontrados sem execução de JavaScript. Busca e filtros continuam funcionando com JavaScript. Cada oficina aponta para outras três da mesma área; os textos usam apenas as informações existentes, sem inventar horários ou vagas.
 
@@ -73,3 +73,11 @@ O fluxo opcional de coleta, classificação por palavras-chave, rascunhos e revi
 Os cartões de instituições têm altura independente, conforme o conteúdo, para evitar que notícias de um local estiquem os demais. Publicações dentro das instituições ficam recolhidas em um bloco expansível; as imagens mantêm suas proporções. Essa estrutura também é gerada pelo importador, preservando o ajuste em novas aprovações.
 
 O modo automático, autorizado para posts novos sem aprovação individual, está em [automation/AUTOMATIC.md](automation/AUTOMATIC.md). Exige atualizar a unidade da VPS e inserir ali um token GitHub limitado a este repositório. Não exige API do Instagram; a disponibilidade da coleta pública continua limitada ao que o Instagram entregar.
+
+## Cabeçalho, rodapé e imagens
+
+Cabeçalho e rodapé das páginas internas e o rodapé da página inicial vêm de `automation/lib/layout.mjs`. Nas páginas escritas à mão, eles ficam entre os marcadores `<!-- layout:header:start -->` e `<!-- layout:footer:start -->`; `node automation/cli.mjs build` atualiza esses trechos, as páginas de eventos e espaços e a página `404.html`. O menu é controlado por `site.js`, carregado em todas as páginas.
+
+As imagens exibidas são versões WebP otimizadas: `assets/espacos/` (ilustrações dos espaços em 800 e 1600 px), `assets/logo-cultura*.webp`, `assets/favicon.png` e `assets/oficinas-ilustradas.webp`. Os arquivos originais continuam em `assets/` como fonte. Ao acrescentar fotos aos acervos, rode `python3 automation/prepare-gallery.py` e depois o build: o script gera a miniatura, a versão ampliada leve em `assets/galerias/ampliadas/` (usada pelo visualizador) e ignora arquivos idênticos enviados mais de uma vez. O original fica acessível pelo link “Abrir foto original”. Álbuns com mais de 24 fotos mostram as primeiras e um botão “Ver mais”.
+
+Na página inicial, os cartões dos espaços aparecem compactos; endereço, contatos e publicações continuam no HTML e são exibidos nas páginas de cada espaço em `espacos/`.

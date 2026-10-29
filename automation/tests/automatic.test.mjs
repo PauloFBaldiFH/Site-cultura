@@ -23,7 +23,7 @@ test('data de evento só é criada com ano explícito, contexto e sem ambiguidad
 });
 test('publicação sem revisão: baseline, categorias, snapshot atual, idempotência, falha e recuperação',async()=>{
  const files=new Map();for(const file of new Set(['data/publicacoes.json','automation/config.json','index.html',...config.groups.map(g=>g.url.split('#')[0])]))files.set(file,await fs.readFile(path.join(root,file)));
- files.set('index.html',Buffer.from(files.get('index.html').toString().replace('<main>','<main data-edicao-preservada="sim">')));
+ files.set('index.html',Buffer.from(files.get('index.html').toString().replace('<main id="conteudo">','<main id="conteudo" data-edicao-preservada="sim">')));
  const initial=files.get('data/publicacoes.json').toString();let commits=0,fail=false;
  const api={snapshot:async()=>({head:'a'.repeat(40),tree:'b'.repeat(40),files:new Map([...files].map(([p,b])=>[p,hash(b)]))}),read:async(_,file)=>files.get(file),commit:async(_,outputs)=>{if(fail)throw Error('Conflito de atualização');for(const [p,b]of outputs)files.set(p,b);commits++;return String(commits).repeat(40);}};
  await fs.writeFile(path.join(directory,'drafts.json'),'[]');

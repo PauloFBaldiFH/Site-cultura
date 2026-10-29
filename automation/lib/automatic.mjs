@@ -62,7 +62,7 @@ export async function automaticPublish(api,{now=new Date()}={}){
   const config=JSON.parse((await api.read(snapshot,'automation/config.json')).toString('utf8'));validateConfig(config);
   const temporary=await fs.mkdtemp(path.join(STATE,'automatic-run-'));
   try{
-    await fs.mkdir(path.join(temporary,'automation/lib'),{recursive:true});for(const name of ['build.mjs','storage.mjs','core.mjs'])await fs.copyFile(path.join(ROOT,'automation/lib',name),path.join(temporary,'automation/lib',name));
+    await fs.mkdir(path.join(temporary,'automation/lib'),{recursive:true});for(const name of ['build.mjs','layout.mjs','storage.mjs','core.mjs'])await fs.copyFile(path.join(ROOT,'automation/lib',name),path.join(temporary,'automation/lib',name));
     const inputPaths=new Set(['index.html',...config.groups.map(group=>group.url.split('#')[0])]);
     for(const file of inputPaths){const bytes=await api.read(snapshot,file);await fs.mkdir(path.dirname(path.join(temporary,file)),{recursive:true});await fs.writeFile(path.join(temporary,file),bytes);}
     const media=new Map(),added=[];

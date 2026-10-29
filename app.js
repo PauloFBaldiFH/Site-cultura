@@ -18,7 +18,7 @@ function render() {
   picture.style.backgroundSize = `400% ${1285 * 100 / height}%`;
   const content = document.createElement('div'); const category = document.createElement('span'); category.className = 'space-label'; category.textContent = area;
   const heading = document.createElement('h3'); heading.textContent = name;
-  const link = document.createElement('a'); link.className = 'button primary'; link.href = `oficinas/${workshopSlug(name)}.html`; link.textContent = 'Conhecer a oficina →'; link.setAttribute('aria-label', `Conhecer a oficina de ${name}`);
+  const link = document.createElement('a'); link.className = 'card-link'; link.href = `oficinas/${workshopSlug(name)}.html`; link.textContent = 'Conhecer a oficina →'; link.setAttribute('aria-label', `Conhecer a oficina de ${name}`);
   content.append(category, heading, link); card.append(picture, content); return card;
  }));
  document.querySelector('#count').textContent = `${selected.length} ${selected.length === 1 ? 'oficina encontrada' : 'oficinas encontradas'}`;
@@ -26,7 +26,4 @@ function render() {
 }
 document.querySelectorAll('[data-filter]').forEach(button => button.addEventListener('click', () => { category = button.dataset.filter; document.querySelectorAll('[data-filter]').forEach(item => { item.classList.toggle('active', item === button); item.setAttribute('aria-pressed',String(item === button)); }); render(); }));
 document.querySelector('#search').addEventListener('input',render);
-const menu = document.querySelector('.menu');
-menu.addEventListener('click', () => { const open = menu.getAttribute('aria-expanded') !== 'true'; menu.setAttribute('aria-expanded',String(open)); document.querySelector('nav').classList.toggle('open',open); });
-document.querySelectorAll('nav a').forEach(link => link.addEventListener('click',()=>{ menu.setAttribute('aria-expanded','false'); document.querySelector('nav').classList.remove('open'); }));
 render();
