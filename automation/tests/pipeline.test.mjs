@@ -32,6 +32,8 @@ test('importação, revisão explícita, publicação estática, calendário e r
     const home=await fs.readFile(path.join(dir,'index.html'),'utf8');assert(home.indexOf('id="eventos"')<home.indexOf('id="oficinas"'));
     for(const slug of ['departamento','biblioteca','teatro','museu','gasparzinho']){assert(home.includes('href="espacos/'+slug+'.html"'));assert((await fs.readFile(path.join(dir,'espacos',slug+'.html'),'utf8')).includes('href="../index.html#espacos"'));}
     assert((await fs.readFile(path.join(dir,'eventos/canta-palotina.html'),'utf8')).includes('Parte 3'));
+    for(const id of ['cultura-expo','canta-palotina','curso-biscuit','femuse','teatro']){const file=id==='teatro'?'espacos/teatro.html':'eventos/'+id+'.html';const html=await fs.readFile(path.join(dir,file),'utf8');const expected=config.galleries.filter(g=>g.id===id).reduce((n,g)=>n+g.photos.length,0);assert.equal((html.match(/class="gallery-photo"/g)||[]).length,expected);assert(html.includes('../gallery.js'));assert(!html.includes('As fotos deste acervo ainda'));}
+
 
     await fs.mkdir(path.join(state,'lock'));assert.equal(run('import',input).status,1);assert.equal(JSON.parse(await fs.readFile(path.join(dir,'data/publicacoes.json'),'utf8')).length,1);
   }finally{await fs.rm(dir,{recursive:true,force:true});}
