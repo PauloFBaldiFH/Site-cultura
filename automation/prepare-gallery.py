@@ -15,6 +15,6 @@ galleries=[]
 with ThreadPoolExecutor(max_workers=4) as pool:
  for slug,folder,label in folders:
   files=sorted(p for p in (root/'assets'/folder).iterdir() if p.suffix.lower() in ['.jpeg','.jpg','.png','.webp'])
-  galleries.append(dict(id=slug,label=label,photos=list(pool.map(photo,files))))
+  galleries.append(dict(id=slug,label=label,photos=list(pool.map(photo,files)),videos=[p.relative_to(root).as_posix() for p in sorted((root/'assets'/folder).glob('*.mp4'))]))
 p=root/'automation/config.json';config=json.loads(p.read_text());config['galleries']=galleries;p.write_text(json.dumps(config,ensure_ascii=False,indent=2)+'\n')
 print('Fotos:',sum(len(g['photos']) for g in galleries),'Miniaturas MB:',round(sum(p.stat().st_size for p in dest.iterdir())/1048576,2))

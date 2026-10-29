@@ -636,7 +636,8 @@
           "width": 189,
           "height": 420
         }
-      ]
+      ],
+      "videos": []
     },
     {
       "id": "canta-palotina",
@@ -1242,7 +1243,8 @@
           "width": 189,
           "height": 420
         }
-      ]
+      ],
+      "videos": []
     },
     {
       "id": "canta-palotina",
@@ -1848,7 +1850,8 @@
           "width": 560,
           "height": 252
         }
-      ]
+      ],
+      "videos": []
     },
     {
       "id": "canta-palotina",
@@ -1950,7 +1953,8 @@
           "width": 189,
           "height": 420
         }
-      ]
+      ],
+      "videos": []
     },
     {
       "id": "curso-biscuit",
@@ -2178,7 +2182,8 @@
           "width": 420,
           "height": 420
         }
-      ]
+      ],
+      "videos": []
     },
     {
       "id": "femuse",
@@ -2784,7 +2789,8 @@
           "width": 420,
           "height": 420
         }
-      ]
+      ],
+      "videos": []
     },
     {
       "id": "femuse",
@@ -3390,7 +3396,8 @@
           "width": 420,
           "height": 420
         }
-      ]
+      ],
+      "videos": []
     },
     {
       "id": "femuse",
@@ -3678,6 +3685,15 @@
           "width": 420,
           "height": 420
         }
+      ],
+      "videos": [
+        "assets/Femuse 2026 - parte 3/WhatsApp Video 2026-09-18 at 11.00.31.mp4",
+        "assets/Femuse 2026 - parte 3/WhatsApp Video 2026-09-18 at 11.00.37.mp4",
+        "assets/Femuse 2026 - parte 3/WhatsApp Video 2026-10-26 at 08.56.51.mp4",
+        "assets/Femuse 2026 - parte 3/WhatsApp Video 2026-10-26 at 09.01.22.mp4",
+        "assets/Femuse 2026 - parte 3/WhatsApp Video 2026-10-26 at 09.01.26.mp4",
+        "assets/Femuse 2026 - parte 3/WhatsApp Video 2026-10-26 at 09.07.54.mp4",
+        "assets/Femuse 2026 - parte 3/WhatsApp Video 2026-10-26 at 09.07.56.mp4"
       ]
     },
     {
@@ -4200,7 +4216,8 @@
           "width": 420,
           "height": 420
         }
-      ]
+      ],
+      "videos": []
     }
   ]
 }
