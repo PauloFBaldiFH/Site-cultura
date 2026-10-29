@@ -321,7 +321,8 @@
         "Parte 1",
         "Parte 2",
         "Parte 3"
-      ]
+      ],
+      "visible": true
     },
     {
       "id": "canta-palotina",
@@ -336,7 +337,8 @@
         "Parte 1",
         "Parte 2",
         "Parte 3"
-      ]
+      ],
+      "visible": true
     },
     {
       "id": "domingueira",
@@ -345,7 +347,8 @@
       "keywords": [
         "domingueira",
         "domingueiras"
-      ]
+      ],
+      "visible": false
     },
     {
       "id": "cultura-expo",
@@ -358,7 +361,8 @@
       "edition": "2026",
       "parts": [
         "Fotos"
-      ]
+      ],
+      "visible": false
     },
     {
       "id": "curso-biscuit",
@@ -370,7 +374,8 @@
       "edition": "2026",
       "parts": [
         "Fotos"
-      ]
+      ],
+      "visible": false
     }
   ],
   "galleries": [
