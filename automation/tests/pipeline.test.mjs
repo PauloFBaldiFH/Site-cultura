@@ -28,7 +28,11 @@ test('importação, revisão explícita, publicação estática, calendário e r
     assert((await fs.readFile(path.join(dir,'eventos/calendar-data.js'),'utf8')).includes('2026-12-10'));
     assert.equal(run('import',input).status,0);drafts=JSON.parse(await fs.readFile(path.join(state,'drafts.json'),'utf8'));assert.equal(drafts.length,1);assert.equal(drafts[0].status,'approved');
     const first=await fs.readFile(path.join(dir,'index.html'),'utf8');assert.equal(run('build').status,0);assert.equal(await fs.readFile(path.join(dir,'index.html'),'utf8'),first);
-    assert.equal((await fs.readFile(path.join(dir,'sitemap.xml'),'utf8')).match(/<loc>/g).length,33);
+    assert.equal((await fs.readFile(path.join(dir,'sitemap.xml'),'utf8')).match(/<loc>/g).length,40);
+    const home=await fs.readFile(path.join(dir,'index.html'),'utf8');assert(home.indexOf('id="eventos"')<home.indexOf('id="oficinas"'));
+    for(const slug of ['departamento','biblioteca','teatro','museu','gasparzinho']){assert(home.includes('href="espacos/'+slug+'.html"'));assert((await fs.readFile(path.join(dir,'espacos',slug+'.html'),'utf8')).includes('href="../index.html#espacos"'));}
+    assert((await fs.readFile(path.join(dir,'eventos/canta-palotina.html'),'utf8')).includes('Parte 3'));
+
     await fs.mkdir(path.join(state,'lock'));assert.equal(run('import',input).status,1);assert.equal(JSON.parse(await fs.readFile(path.join(dir,'data/publicacoes.json'),'utf8')).length,1);
   }finally{await fs.rm(dir,{recursive:true,force:true});}
 });

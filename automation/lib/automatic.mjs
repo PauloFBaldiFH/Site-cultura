@@ -6,7 +6,7 @@ import {ROOT,STATE,readJSON,writeJSON} from './storage.mjs';
 import {record,classify,imageExtension} from './core.mjs';
 export const REPOSITORY='PauloFBaldiFH/Site-cultura';
 const branch='main';
-const safeFile=file=>file==='index.html'||file==='sitemap.xml'||file==='data/publicacoes.json'||file==='eventos/calendar-data.js'||/^(oficinas|eventos)\/[a-z0-9-]+\.html$/.test(file)||/^assets\/publicacoes\/ig-[A-Za-z0-9_-]+\.(jpg|png|webp)$/.test(file);
+const safeFile=file=>file==='index.html'||file==='sitemap.xml'||file==='data/publicacoes.json'||file==='eventos/calendar-data.js'||/^(oficinas|eventos|espacos)\/[a-z0-9-]+\.html$/.test(file)||/^assets\/publicacoes\/ig-[A-Za-z0-9_-]+\.(jpg|png|webp)$/.test(file);
 const gitHash=buffer=>createHash('sha1').update(`blob ${buffer.length}\0`).update(buffer).digest('hex');
 export class GitHub {
   constructor(token,fetchImpl=fetch){if(!/^[A-Za-z0-9_-]{20,300}$/.test(token))throw Error('Credencial GitHub ausente ou inválida');this.token=token;this.fetchImpl=fetchImpl;this.requests=0;}
@@ -74,7 +74,7 @@ export async function automaticPublish(api,{now=new Date()}={}){
     }
     const merged=[...current,...added];await fs.mkdir(path.join(temporary,'data'),{recursive:true});await fs.writeFile(path.join(temporary,'data/publicacoes.json'),JSON.stringify(merged,null,2)+'\n');
     const {build}=await import(pathToFileURL(path.join(temporary,'automation/lib/build.mjs')).href);await build(config);
-    const outputPaths=new Set([...inputPaths,'data/publicacoes.json','eventos/calendar-data.js','sitemap.xml','eventos/index.html',...config.events.map(event=>'eventos/'+event.id+'.html')]);
+    const outputPaths=new Set([...inputPaths,'data/publicacoes.json','eventos/calendar-data.js','sitemap.xml','eventos/index.html',...config.groups.filter(g=>g.id.startsWith('espaco:')).map(g=>'espacos/'+g.id.split(':')[1]+'.html'),...config.events.map(event=>'eventos/'+event.id+'.html')]);
     const outputs=new Map(media);for(const file of outputPaths)outputs.set(file,await fs.readFile(path.join(temporary,file)));
     const sha=await api.commit(snapshot,outputs,added.length);
     if(!sha)throw Error('Publicações novas não produziram commit; estado preservado');

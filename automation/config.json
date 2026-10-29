@@ -315,6 +315,12 @@
       "description": "Publicações e informações sobre o FEMUSE compartilhadas pela Cultura de Palotina.",
       "keywords": [
         "femuse"
+      ],
+      "edition": "2026",
+      "parts": [
+        "Parte 1",
+        "Parte 2",
+        "Parte 3"
       ]
     },
     {
@@ -324,6 +330,12 @@
       "keywords": [
         "canta palotina",
         "cantapalotina"
+      ],
+      "edition": "2026",
+      "parts": [
+        "Parte 1",
+        "Parte 2",
+        "Parte 3"
       ]
     },
     {
@@ -333,6 +345,31 @@
       "keywords": [
         "domingueira",
         "domingueiras"
+      ]
+    },
+    {
+      "id": "cultura-expo",
+      "name": "Cultura Expo",
+      "description": "Conteúdo e registros da Cultura Expo em Palotina.",
+      "keywords": [
+        "cultura expo",
+        "culturaexpo"
+      ],
+      "edition": "2026",
+      "parts": [
+        "Fotos"
+      ]
+    },
+    {
+      "id": "curso-biscuit",
+      "name": "Curso Biscuit",
+      "description": "Conteúdo e registros do Curso Biscuit em Palotina.",
+      "keywords": [
+        "biscuit"
+      ],
+      "edition": "2026",
+      "parts": [
+        "Fotos"
       ]
     }
   ]
